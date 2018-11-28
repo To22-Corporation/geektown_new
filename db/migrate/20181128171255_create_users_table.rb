@@ -7,7 +7,8 @@ class CreateUsersTable < ActiveRecord::Migration[5.2]
       t.string :salt
       t.unsigned_integer :university_id
       t.unsigned_integer :faculty_id
-      t.unsigned_integer :age, limit: 1
+      t.unsigned_integer :age, limit: 1, null: true
+      t.timestamps
     end
   end
 end
