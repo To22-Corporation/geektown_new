@@ -1,0 +1,26 @@
+FROM ruby:2.5.1
+LABEL title="rails web server"
+LABEL version="1.0"
+
+# リポジトリを更新、依存モジュールをインストール
+RUN apt-get update -qq && \
+    apt-get install -y build-essential \
+                       default-libmysqlclient-dev \
+                       nodejs
+# ルート直下にコンテナ内作業ディレクトリ作成
+RUN mkdir /recipio_app
+WORKDIR /recipio_app
+
+# ホストにGemfileと.lockをコピー
+ADD Gemfile /recipio_app/Gemfile
+ADD Gemfile.lock /recipio_app/Gemfile.lock
+
+# gemをインストール
+RUN bundle install --without development test
+
+# ホストのアプリケーションディレクトリをコピー
+ADD . /recipio_app
+
+RUN mkdir -p tmp/sockets
+
+

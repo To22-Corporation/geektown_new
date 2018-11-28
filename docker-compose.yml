@@ -1,0 +1,47 @@
+version: '3.4'
+services:
+  app:
+    container_name: geektown_app
+    tty: true
+    stdin_open: true
+    privileged: true
+    build:
+      context: .
+      dockerfile: ./containers/rails/Dockerfile
+    env_file:
+      - .env
+    command: bundle exec puma -C config/puma.rb
+    volumes:
+      - .:/app
+      - public-data:/app/public
+      - tmp-data:/app/tmp
+    depends_on:
+      - db
+  db:
+    container_name: geektown_db
+    build:
+      context: .
+      dockerfile: ./containers/mysql/Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+  web:
+    container_name: geektown_web
+    build:
+      context: ./containers/nginx
+      dockerfile: Dockerfile
+    volumes:
+      - public-data:/app/public
+      - tmp-data:/app/tmp
+    ports:
+      - 80:80
+    depends_on:
+      - app
+
+volumes:
+  public-data:
+  tmp-data:
+  db-data:
