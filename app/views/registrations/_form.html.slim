@@ -1,4 +1,4 @@
-= form_with model: @user, url: :registration, local: true do |f|
+= form_with model: @user, url: :registration, method: :post, local: true do |f|
   - if @user.errors.any?
     #error_explanation
       h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
@@ -27,4 +27,4 @@
   .field
     = f.label :faculty_id
     = f.number_field :faculty_id
-  .actions = f.submit
+  .actions = f.submit '登録'
