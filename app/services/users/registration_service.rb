@@ -2,7 +2,6 @@
 
 module Users
   module RegistrationService
-
     module_function
 
     def register(user_params)

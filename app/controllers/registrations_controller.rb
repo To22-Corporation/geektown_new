@@ -31,8 +31,6 @@ class RegistrationsController < ApplicationController
   end
 
   def check_logged_in
-    if logged_in?
-      redirect_to root_path, alert: 'ログイン中は新規登録できません'
-    end
+    redirect_to root_path, alert: 'ログイン中は新規登録できません' if logged_in?
   end
 end
