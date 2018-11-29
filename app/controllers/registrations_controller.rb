@@ -11,7 +11,7 @@ class RegistrationsController < ApplicationController
     @user = Users::RegistrationService.register(user_params)
 
     if @user.save
-      redirect_to @user, notice: 'User was successfully created.'
+      redirect_to @user, notice: '新規登録完了しました。'
     else
       render :new
     end
