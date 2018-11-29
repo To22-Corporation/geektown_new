@@ -7,29 +7,42 @@ html
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
-  body
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
-      a.navbar-brand href=root_path
-        | Geektown
-      button.navbar-toggler.collapsed type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"
-        span.navbar-toggler-icon
-      .collapse.navbar-collapse#navbar
-        ul.navbar-nav.mr-auto
-          - if logged_in?
-            li.nav-item
-              = link_to "プロフィール", edit_user_path(current_user.id), class: "nav-link"
-            li.nav-item
-              = link_to "ログアウト", :logout, method: :post, class: "nav-link"
-          - else
-            - unless request.fullpath == '/login'
+  body.text_center style="padding-top: 80px;"
+    header
+      nav.navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-dark
+        a.navbar-brand href=root_path
+          | Geektown
+        button.navbar-toggler.collapsed type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse#navbar
+          ul.navbar-nav.ml-auto
+            - if logged_in?
+              li.nav-item
+                = link_to "プロフィール", edit_user_path(current_user.id), class: "nav-link"
+              li.nav-item
+                = link_to "ログアウト", :logout, method: :post, class: "nav-link"
+            - else
               li.nav-item
                 = link_to "ログイン", :login, class: "nav-link"
-            - unless request.fullpath == '/registration/new'
-              li.nav-item
-                = link_to "新規登録", :new_registration, class: "nav-link"
-    div
-      p#notice
-        = flash[:notice]
-      p#alert
-        = flash[:alert]
-    = yield
+              - unless request.fullpath == '/registration/new'
+                li.nav-item
+                  = link_to "新規登録", :new_registration, class: "nav-link"
+    main role="main"
+      .container
+        - if flash[:notice]
+          .alert.alert-info role="alert"
+            p.mt-auto.mb-auto
+              = flash[:notice]
+        - if flash[:alert]
+          .alert.alert-danger role="alert"
+            p.mt-auto.mb-auto
+              = flash[:alert]
+        = yield
+
+      footer.container
+        p
+          |© 2018-2019 To22, Inc.
+          a href="#"
+            | Privacy
+          a href="#"
+            | Terms
