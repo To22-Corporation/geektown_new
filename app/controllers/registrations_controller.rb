@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class RegistrationsController < ApplicationController
+  before_action :check_logged_in
   skip_before_action :require_login, only: %i[new create]
 
   def new
@@ -27,5 +28,11 @@ class RegistrationsController < ApplicationController
       :faculty_id,
       :university_id
     )
+  end
+
+  def check_logged_in
+    if logged_in?
+      redirect_to root_path, alert: 'ログイン中は新規登録できません'
+    end
   end
 end
