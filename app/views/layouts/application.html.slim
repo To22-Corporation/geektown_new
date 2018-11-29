@@ -8,15 +8,25 @@ html
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
   body
-    .nav
-     - if logged_in?
-       = link_to "プロフィール", edit_user_path(current_user.id)
-       = link_to "ログアウト", :logout, method: :post
-     - else
-       - unless request.fullpath == '/login'
-         = link_to "ログイン", :login
-       - unless request.fullpath == '/registration/new'
-         = link_to "新規登録", :new_registration
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+      a.navbar-brand href=root_path
+        | Geektown
+      button.navbar-toggler.collapsed type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbar
+        ul.navbar-nav.mr-auto
+          - if logged_in?
+            li.nav-item
+              = link_to "プロフィール", edit_user_path(current_user.id), class: "nav-link"
+            li.nav-item
+              = link_to "ログアウト", :logout, method: :post, class: "nav-link"
+          - else
+            - unless request.fullpath == '/login'
+              li.nav-item
+                = link_to "ログイン", :login, class: "nav-link"
+            - unless request.fullpath == '/registration/new'
+              li.nav-item
+                = link_to "新規登録", :new_registration, class: "nav-link"
     div
       p#notice
         = flash[:notice]
