@@ -27,8 +27,9 @@ html
               - unless request.fullpath == '/registration/new'
                 li.nav-item
                   = link_to "新規登録", :new_registration, class: "nav-link"
+
     main role="main"
-      .container
+      .container.text-center
         - if flash[:notice]
           .alert.alert-info role="alert"
             p.mt-auto.mb-auto
