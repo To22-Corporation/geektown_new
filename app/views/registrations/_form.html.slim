@@ -1,30 +1,23 @@
 = form_with model: @user, url: :registration, method: :post, local: true do |f|
-  - if @user.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      ul
-        - @user.errors.full_messages.each do |message|
-          li = message
-
-  .field
+  .form-group
     = f.label :username
-    = f.text_field :username
-  .field
+    = f.text_field :username, class: "form-control", placeholder: "Name", required: true
+  .form-group
     = f.label :email
-    = f.text_field :email
-  .field
+    = f.email_field :email, class: "form-control", placeholder: "Email address", required: true
+  .form-group
     = f.label :password
-    = f.password_field :password
-  .field
+    = f.password_field :password, class: "form-control", required: true
+  .form-group
     = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  .field
+    = f.password_field :password_confirmation, class: "form-control", required: true
+  .form-group
     = f.label :age
-    = f.number_field :age
-  .field
+    = f.number_field :age, class: "form-control", value: "18", required: true
+  .form-group
     = f.label :university_id
-    = f.number_field :university_id
-  .field
+    = f.number_field :university_id, class: "form-control", value: "1", required: true
+  .form-group
     = f.label :faculty_id
-    = f.number_field :faculty_id
-  .actions = f.submit '登録'
+    = f.number_field :faculty_id, class: "form-control", value: "1", required: true
+  .actions = f.submit '登録', class: "btn btn-primary btn-block btn-lg"

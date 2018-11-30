@@ -29,18 +29,18 @@ html
                   = link_to "新規登録", :new_registration, class: "nav-link"
 
     main role="main"
-      .container.text-center
+      .container
         - if flash[:notice]
-          .alert.alert-info role="alert"
+          .alert.alert-info.text-center role="alert"
             p.mt-auto.mb-auto
               = flash[:notice]
         - if flash[:alert]
-          .alert.alert-danger role="alert"
+          .alert.alert-danger.text-center role="alert"
             p.mt-auto.mb-auto
               = flash[:alert]
         = yield
 
-      footer.container
+      footer.container.mt-5
         p
           |© 2018-2019 To22, Inc.
           a href="#"
