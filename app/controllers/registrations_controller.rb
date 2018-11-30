@@ -10,11 +10,11 @@ class RegistrationsController < ApplicationController
 
   def create
     @user = Users::RegistrationService.register(user_params)
-
-    if @user.save
-      redirect_to @user, notice: '新規登録完了しました。'
+    if (@user = login(@user.email, user_params[:password]))
+      redirect_back_or_to(:users, notice: '新規登録完了しました')
     else
-      render :new
+      flash.now[:alert] = '新規登録に失敗しました'
+      render action: 'new'
     end
   end
 
