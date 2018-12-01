@@ -1,0 +1,12 @@
+- if @user.errors.any?
+  .row.justify-content-center
+    .alert.alert-danger role="alert"
+      ul
+        - @user.errors.full_messages.each do |message|
+          li.mt-auto.mb-auto = message
+
+.row.justify-content-center
+  .col-4
+    h1.h3.mb-3.font-weight-normal.text-center
+      | Sign up
+    = render 'form'

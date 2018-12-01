@@ -90,19 +90,18 @@ open erd.pdf
 
 ### 開発手順
 1. 機能追加、バグフィックスのためのissueを立てる
-  1. 以下を記入
-    1. 目的
-    1. 外部仕様(満たすべき機能)
-  1. ラベルを設定(develop, bugfix, enhancement, invalid)
+    1. 以下を記入
+        1. 目的
+        1. 外部仕様(満たすべき機能)
+    1. ラベルを設定(develop, bugfix, enhancement, invalid)
 1. ブランチを切る(masterでは作業をしない)
-  1. ブランチ名は{user名}/{issue番号}_{実装機能}
-    - ex) oky123/#5_add_user_registration
+    1. ブランチ名は{user名}/{issue番号}_{実装機能} :ex) oky123/5_add_user_registration
 1. プルリクを立てる(masterと差分ができた段階で)
-  1. タイトルに[WIP] とつける(Work In Progressの意味)
-  1. 以下を記入
-    1. 関連issue番号 :ex) #2 みたいな感じで入力するとgithubが自動で関連づけしてくれます
-    1. 実装すべきこと(TODOみたいな感じトップダウンに考えると実装が捗ります)
-  1. assignee に自分(開発者)を選択
+    1. タイトルに[WIP] とつける(Work In Progressの意味)
+    1. 以下を記入
+        1. 関連issue番号 :ex) #2 みたいな感じで入力するとgithubが自動で関連づけしてくれます
+        1. 実装すべきこと(TODOみたいな感じトップダウンに考えると実装が捗ります)
+    1. assignee に自分(開発者)を選択
 1. 設計段階や実装中に相談やレビューして欲しい際はプルリクのreviewerにoky123をアサインしてレビューお願いすると良いです
 1. 実装完了したらレビューしてもらい、OKが出たらマージする
 
@@ -130,7 +129,7 @@ masterは常にデプロイできる状態(のはず)です。
 LGTMという言葉がマージのGoサインということに決めましょう！
 LGTMが出たら、緊急時以外実装した人がプルリクエストをマージします。
 
-### 参考記事
+## 参考記事
 
 https://qiita.com/tbpgr/items/4ff76ef35c4ff0ec8314
 

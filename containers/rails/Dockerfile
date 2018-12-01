@@ -6,8 +6,10 @@ LABEL version="1.0"
 RUN apt-get update -qq && \
     apt-get install -y build-essential \
                        default-libmysqlclient-dev \
-                       nodejs \
                        graphviz
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+        && apt-get install -y nodejs
 
 # ルート直下にコンテナ内作業ディレクトリ作成
 RUN mkdir /app

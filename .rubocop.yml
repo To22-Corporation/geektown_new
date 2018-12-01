@@ -1,0 +1,65 @@
+Rails:
+  Enabled: true
+
+AllCops:
+  # Rubyのバージョンを指定
+  TargetRubyVersion: 2.5.1
+  # 除外するファイル
+  Exclude:
+    - vendor/bundle/**/*
+    - bin/*
+    - db/**/*
+    - config/**/*
+    - Gemfile
+    - app/models/recipe.rb
+
+# 日本語のコメントを許可
+Style/AsciiComments:
+  Enabled: false
+
+# frozen_string_literal: trueを書かなくてもよい
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# ドキュメントなしでもよい
+Style/Documentation:
+  Enabled: false
+
+# ''と""を統一しない(もしかしたら使い分けてるため)
+Style/StringLiterals:
+  Enabled: false
+
+# 条件式を意識してる可能性があるためifとunlessを後置しなくてもよい
+Style/IfUnlessModifier:
+  Enabled: false
+
+# モジュール名::クラス名の定義を許可
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# class endの前に無駄な改行が入ってもよい
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+# 1行の長さがいくらでも良い
+Metrics/LineLength:
+  Enabled: false
+
+# メソッド内の行数は最大で40行
+MethodLength:
+  CountComments: true
+  Max: 40
+
+# spec以下はブロック数がいくらでも良い
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+# abc checkの閾値を調整
+Metrics/AbcSize:
+  Max: 50
+
+# class length
+Metrics/ClassLength:
+  Exclude:
+    - 'lib/tasks/seed_users.rb'
