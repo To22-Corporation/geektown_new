@@ -9,7 +9,7 @@ class CreateUsersTable < ActiveRecord::Migration[5.2]
       t.unsigned_integer :faculty_id
       t.unsigned_integer :age, limit: 1, null: true
       t.string :remember_me_token, default: nil
-      t.datetime :users, :remember_me_token_expires_at, default: nil
+      t.datetime :remember_me_token_expires_at, default: nil
 
       t.index :remember_me_token
       t.timestamps

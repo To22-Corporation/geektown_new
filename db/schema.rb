@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 2018_11_28_171255) do
     t.integer "faculty_id", unsigned: true
     t.integer "age", limit: 1, unsigned: true
     t.string "remember_me_token"
-    t.datetime "users"
     t.datetime "remember_me_token_expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
