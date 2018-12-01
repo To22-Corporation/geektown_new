@@ -44,6 +44,16 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+    # logger setting
+  config.log_level = :debug
+  logger = ActiveSupport::Logger.new("log/development.log", 1, 10 * 1024 * 1024)
+  logger.formatter = ::Logger::Formatter.new
+
+  # write logs to stdout and file
+  console = ActiveSupport::Logger.new(STDOUT)
+  logger.extend ActiveSupport::Logger.broadcast(console)
+  config.logger = logger
+
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.

@@ -2,11 +2,10 @@
 
 Rails.application.routes.draw do
   root 'users#index'
+  get 'login' => 'users/sessions#new', as: :new_login
+  post 'login' => 'users/sessions#create'
+  post 'logout' => 'users/sessions#destroy'
 
   resource :registration, only: %i[new create]
-  get 'login' => 'user_sessions#new', as: :new_login
-  post 'login' => 'user_sessions#create'
-  post 'logout' => 'user_sessions#destroy'
-
   resources :users, except: %i[new create destroy]
 end
