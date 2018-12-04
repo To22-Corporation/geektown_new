@@ -1,13 +1,10 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
-  validates :username, presence: true
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :password, confirmation: true,
                        presence: true,
                        length: { minimum: 6 }
   validates :password_confirmation, presence: true
-  validates :email, uniqueness: true, presence: true
-  validates :age, inclusion: 1..100, presence: true
-  validates :university_id, presence: true
-  validates :faculty_id, presence: true
 end
