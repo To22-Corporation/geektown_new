@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   post 'logout' => 'users/sessions#destroy'
 
   resource :registration, only: %i[new create]
-  resources :users, except: %i[new create destroy]
+  resources :users, only: %i[] do
+    resource :profile, only: %i[new create edit update]
+  end
 end
