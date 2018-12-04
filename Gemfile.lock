@@ -190,6 +190,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    seed-fu (2.3.9)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
     slim (4.0.1)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
@@ -247,6 +250,7 @@ DEPENDENCIES
   rails-erd
   rubocop
   sass-rails (~> 5.0)
+  seed-fu
   slim-rails
   sorcery
   spring
