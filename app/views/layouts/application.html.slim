@@ -18,7 +18,7 @@ html
           ul.navbar-nav.ml-auto
             - if logged_in?
               li.nav-item
-                = link_to "プロフィール", edit_user_path(current_user.id), class: "nav-link"
+                = link_to "プロフィール", edit_user_profile_path(current_user.id), class: "nav-link"
               li.nav-item
                 = link_to "ログアウト", :logout, method: :post, class: "nav-link"
             - else
