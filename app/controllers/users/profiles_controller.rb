@@ -6,12 +6,14 @@ class Users::ProfilesController < ApplicationController
 
   def new
     set_master
-    @profile = Profile.new
+    @profile = current_user.build_profile
+    @profile.profile_skills.build
   end
 
   def create
     @profile = current_user.build_profile(profile_params)
 
+    binding.pry
     if @profile.save
       redirect_to({ action: 'edit', user_id: current_user.id }, notice: '更新完了しました')
     else
@@ -32,15 +34,16 @@ class Users::ProfilesController < ApplicationController
     end
   end
 
+  private
+
   def profile_params
     params.require(:profile).permit(
       :name,
       :university_id,
-      :faculty_id
+      :faculty_id,
+      profile_skills_attributes: %i[skill_id level]
     )
   end
-
-  private
 
   def profile?
     redirect_to action: :edit, user_id: current_user.id if current_user.profile
@@ -53,5 +56,6 @@ class Users::ProfilesController < ApplicationController
   def set_master
     @universities = University.all
     @faculties = Faculty.all
+    @skills = Skill.all
   end
 end

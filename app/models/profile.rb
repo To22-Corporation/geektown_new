@@ -3,8 +3,9 @@ class Profile < ApplicationRecord
   belongs_to :user
   belongs_to :university
   belongs_to :faculty
-  has_many :profile_skills, dependent: :destroy
+  has_many :profile_skills, dependent: :destroy, inverse_of: :profile
   has_many :skills, through: :profile_skills
+  accepts_nested_attributes_for :profile_skills, allow_destroy: true
 
   # Validations
   validates :user_id, presence: true
