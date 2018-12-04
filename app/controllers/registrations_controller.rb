@@ -10,12 +10,10 @@ class RegistrationsController < ApplicationController
 
   def create
     @user = Users::RegistrationService.register(user_params)
-    if (@user = login(@user.email, user_params[:password]))
+    if @user.save && login(@user.email, user_params[:password])
       redirect_back_or_to(:users, notice: '新規登録完了しました')
-    else
-      flash.now[:alert] = '新規登録に失敗しました'
-      render action: 'new'
     end
+    render action: 'new'
   end
 
   def user_params
@@ -27,6 +25,7 @@ class RegistrationsController < ApplicationController
   end
 
   def check_logged_in
-    redirect_to root_path, alert: 'ログイン中は新規登録できません' if logged_in?
+    # redirect_back fallback_location: root_path, alert: 'ログアウトしてください' if logged_in?
+    redirect_to root_path, alert: 'ログアウトしてください' if logged_in?
   end
 end
