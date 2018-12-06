@@ -2,9 +2,12 @@
   = f.text_field :name, class: "form-control", placeholder: "Name", required: true
   = f.select :university_id, @universities.map{|u| [u.name, u.id]}, { prompt: "大学" }, class: "form-control", required: true
   = f.select :faculty_id, @faculties.map{|f| [f.name, f.id]}, { prompt: "学部" }, class: "form-control", required: true
-
+  br
+  = f.label :profile_skills, 'スキル'
   = f.fields_for :profile_skills do |p|
-    = p.number_field :level, class: "form-control", placeholder: 'level', required: true
-    = p.select :skill_id, @skills.map{|s| [s.name, s.id]}, { prompt: "skill" }, class: "form-control", required: true
+    = render "profile_skill_fields", f: p
+  br
+  = link_to_add_fields "スキル追加", f, :profile_skills
+
   .actions.mt-4
     = f.submit "Save", class: "btn btn-lg btn-primary btn-block"

@@ -1,0 +1,4 @@
+.fieldset
+  = f.select :skill_id, @skills.map{|s| [s.name, s.id]}, { prompt: "skill" }, class: "form-control", required: true
+  = f.number_field :level, class: "form-control", placeholder: 'level', required: true
+  = link_to "削除", '#', class: "remove_fields"
