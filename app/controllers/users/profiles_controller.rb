@@ -13,7 +13,6 @@ class Users::ProfilesController < ApplicationController
   def create
     @profile = current_user.build_profile(profile_params)
 
-    binding.pry
     if @profile.save
       redirect_to({ action: 'edit', user_id: current_user.id }, notice: '更新完了しました')
     else
@@ -46,11 +45,13 @@ class Users::ProfilesController < ApplicationController
   end
 
   def profile?
+    binding.pry
     redirect_to action: :edit, user_id: current_user.id if current_user.profile
   end
 
   def no_profile?
-    redirect_to action: :new unless current_user.profile
+    binding.pry
+    redirect_to action: :new, user_id: current_user.id unless current_user.profile
   end
 
   def set_master
