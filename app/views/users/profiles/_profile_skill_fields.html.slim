@@ -1,0 +1,13 @@
+li.list-group-item
+  .form-group.row
+    = f.label :skill_id, "スキル名", class: 'col-form-label col-2'
+    .col-10
+      = f.select :skill_id, @skills.map{|s| [s.name, s.id]}, { prompt: "スキル名を選択してください" }, class: "form-control", required: true
+
+  .form-group.row
+    = f.label :level, "レベル", class: 'col-form-label col-2'
+    .col-10
+      = f.number_field :level, class: "form-control", placeholder: 'レベルを入力してください', required: true
+
+  = f.hidden_field :_destroy
+  = link_to "削除", '#', class: "remove_fields btn btn-danger float-right"
