@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
   resource :registration, only: %i[new create]
   resources :users, module: :users, only: %i[index] do
-    resource :profile, only: %i[new create edit update]
+    resource :profile, only: %i[new create edit update show]
   end
 end

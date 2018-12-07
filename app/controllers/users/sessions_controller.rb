@@ -9,7 +9,7 @@ class Users::SessionsController < ApplicationController
 
   def create
     if (@user = login(params[:email], params[:password]))
-      redirect_back_or_to(:users, notice: 'ログインしました')
+      redirect_back_or_to(user_profile_path(current_user.id), notice: 'ログインしました')
     else
       flash.now[:alert] = 'ログインに失敗しました'
       render action: 'new'
