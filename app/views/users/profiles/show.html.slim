@@ -10,6 +10,6 @@
         .align-middle
           h5.card-title ="#{@user.profile.university.name}・#{@user.profile.faculty.name}"
           - @user.profile.profile_skills.each do |profile_skill|
-            button.btn disabled='disabled' class='btn-info'
+            button.btn disabled='disabled' class="btn-#{Settings.skill.color_class[profile_skill.level-1]}"
               = profile_skill.skill.name
               span.badge.badge-light.ml-2 =profile_skill.level
