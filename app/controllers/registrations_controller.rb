@@ -10,10 +10,11 @@ class RegistrationsController < ApplicationController
 
   def create
     @user = Users::RegistrationService.register(user_params)
-    if @user.save && login(@user.email, user_params[:password])
-      redirect_back_or_to(:users, notice: '新規登録完了しました')
+    if login(@user.email, user_params[:password])
+      redirect_back_or_to(new_user_profile_path(current_user.id), notice: '新規登録完了しました')
+    else
+      render action: 'new'
     end
-    render action: 'new'
   end
 
   def user_params

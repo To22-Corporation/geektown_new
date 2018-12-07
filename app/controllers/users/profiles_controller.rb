@@ -16,6 +16,7 @@ class Users::ProfilesController < ApplicationController
     if @profile.save
       redirect_to({ action: 'edit', user_id: current_user.id }, notice: '更新完了しました')
     else
+      set_master
       render :new
     end
   end
@@ -29,6 +30,7 @@ class Users::ProfilesController < ApplicationController
     if current_user.profile.update(profile_params)
       redirect_to({ action: 'edit', user_id: current_user.id }, notice: '更新完了しました')
     else
+      set_master
       render :new
     end
   end
@@ -45,12 +47,10 @@ class Users::ProfilesController < ApplicationController
   end
 
   def profile?
-    binding.pry
     redirect_to action: :edit, user_id: current_user.id if current_user.profile
   end
 
   def no_profile?
-    binding.pry
     redirect_to action: :new, user_id: current_user.id unless current_user.profile
   end
 
