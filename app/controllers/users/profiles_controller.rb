@@ -21,7 +21,9 @@ class Users::ProfilesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @user = User.includes(profile: :profile_skills).find(request.params["user_id"])
+  end
 
   def edit
     set_master
