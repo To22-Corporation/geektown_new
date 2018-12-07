@@ -3,7 +3,7 @@
 class Users::ProfilesController < ApplicationController
   before_action :only_self, except: %i[show]
   before_action :profile?, only: %i[new create]
-  before_action :no_profile?, only: %i[edit update]
+  before_action :no_profile?, only: %i[edit update show]
 
   def new
     set_master
@@ -15,7 +15,7 @@ class Users::ProfilesController < ApplicationController
     @profile = current_user.build_profile(profile_params)
 
     if @profile.save
-      redirect_to({ action: 'edit', user_id: current_user.id }, notice: '更新完了しました')
+      redirect_to({ action: 'show', user_id: current_user.id }, notice: '更新完了しました')
     else
       render :new
     end
@@ -32,7 +32,7 @@ class Users::ProfilesController < ApplicationController
 
   def update
     if current_user.profile.update(profile_params)
-      redirect_to({ action: 'edit', user_id: current_user.id }, notice: '更新完了しました')
+      redirect_to({ action: 'show', user_id: current_user.id }, notice: '更新完了しました')
     else
       render :new
     end
