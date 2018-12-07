@@ -22,7 +22,7 @@ class Users::ProfilesController < ApplicationController
   end
 
   def show
-    @user = User.includes(profile: :profile_skills).find(request.params["user_id"])
+    @user = User.includes(profile: [:university, :faculty, profile_skills: :skill]).find(request.params["user_id"])
   end
 
   def edit

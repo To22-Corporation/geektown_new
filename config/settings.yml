@@ -1,0 +1,2 @@
+skill:
+  color_class: ['primary', 'success', 'warning', 'info', 'danger']
