@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::ProfilesController < ApplicationController
+  before_action :only_self, except: %i[show]
   before_action :profile?, only: %i[new create]
   before_action :no_profile?, only: %i[edit update]
 
@@ -16,10 +17,11 @@ class Users::ProfilesController < ApplicationController
     if @profile.save
       redirect_to({ action: 'edit', user_id: current_user.id }, notice: '更新完了しました')
     else
-      set_master
       render :new
     end
   end
+
+  def show; end
 
   def edit
     set_master
@@ -30,7 +32,6 @@ class Users::ProfilesController < ApplicationController
     if current_user.profile.update(profile_params)
       redirect_to({ action: 'edit', user_id: current_user.id }, notice: '更新完了しました')
     else
-      set_master
       render :new
     end
   end
@@ -52,6 +53,14 @@ class Users::ProfilesController < ApplicationController
 
   def no_profile?
     redirect_to action: :new, user_id: current_user.id unless current_user.profile
+  end
+
+  def only_self
+    unless current_user.id.to_s == request.params["user_id"]
+      raise StandardError, "Authentication Error"
+    end
+
+    false
   end
 
   def set_master
