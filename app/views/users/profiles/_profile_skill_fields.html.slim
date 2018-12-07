@@ -1,4 +1,10 @@
-.fieldset
-  = f.select :skill_id, @skills.map{|s| [s.name, s.id]}, { prompt: "skill" }, class: "form-control", required: true
-  = f.number_field :level, class: "form-control", placeholder: 'level', required: true
-  = link_to "削除", '#', class: "remove_fields"
+fieldset.
+  .form-group.row
+    = f.label :skill_id, "skill", class: 'col-form-label col-2'
+    .col-10
+      = f.select :skill_id, @skills.map{|s| [s.name, s.id]}, { prompt: "skillを入力してください" }, class: "form-control", required: true
+  .form-group
+    = f.label :level, "level"
+    = f.number_field :level, class: "form-control", placeholder: 'levelを入力してください', required: true
+  = f.hidden_field :_destroy
+  = link_to "削除", '#', class: "remove_fields btn btn-danger"

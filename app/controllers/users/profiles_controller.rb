@@ -41,7 +41,7 @@ class Users::ProfilesController < ApplicationController
       :name,
       :university_id,
       :faculty_id,
-      profile_skills_attributes: %i[skill_id level]
+      profile_skills_attributes: %i[id skill_id level _destroy]
     )
   end
 
