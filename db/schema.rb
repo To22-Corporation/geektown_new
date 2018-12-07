@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_164305) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "paticipations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "participations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "group_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
