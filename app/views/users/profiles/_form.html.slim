@@ -1,14 +1,24 @@
 = form_with model: @profile, url: user_profile_path, local: true do |f|
-  = f.text_field :name, class: "form-control", placeholder: "Name", required: true
-  = f.select :university_id, @universities.map{|u| [u.name, u.id]}, { prompt: "大学" }, class: "form-control", required: true
-  = f.select :faculty_id, @faculties.map{|f| [f.name, f.id]}, { prompt: "学部" }, class: "form-control", required: true
+  .form-group.row
+    = f.label :name, "名前", class: 'col-form-label col-2'
+    .col-10
+      = f.text_field :name, class: "form-control", placeholder: "名前を入力してください", required: true
+  .form-group.row
+    = f.label :university_id, "大学", class: 'col-form-label col-2'
+    .col-10
+      = f.select :university_id, @universities.map{|u| [u.name, u.id]}, { prompt: "大学を選択してください" }, class: "form-control", required: true
+  .form-group.row
+    = f.label :faculty_id, "学部", class: 'col-form-label col-2'
+    .col-10
+      = f.select :faculty_id, @faculties.map{|f| [f.name, f.id]}, { prompt: "学部を選択してください" }, class: "form-control", required: true
   br
 
-  = f.label :profile_skills, 'スキル'
-  = f.fields_for :profile_skills do |p|
-    = render "profile_skill_fields", f: p
-
-  = link_to_add_fields "スキル追加", f, :profile_skills, 'btn btn-primary btn-block'
+  .card.mb-4
+    = f.label :profile_skills, 'スキル', class: 'card-header'
+    = f.fields_for :profile_skills do |p|
+      ul.list-group.list-group-flush
+        = render "profile_skill_fields", f: p
+    = link_to_add_fields "スキル追加", f, :profile_skills, 'btn-default btn'
 
   .actions.mt-4
     = f.submit "Save", class: "btn btn-lg btn-primary btn-block"
