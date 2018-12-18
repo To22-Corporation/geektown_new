@@ -1,5 +1,7 @@
 {
   "name": "geektown_new",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "pc-bootstrap4-datetimepicker": "^4.17.50"
+  }
 }
