@@ -1,6 +1,6 @@
-class Type::FormattedDate < ActiveRecord::Type::String
+class FormattedDateType < ActiveRecord::Type::String
   def cast(value)
-    if !value.kind_of?(String)
+    if !value.nil? && value.class == Time
       "#{value.year}/#{format('%02d', value.month)}/#{format('%02d', value.day)}"
     else
       super
