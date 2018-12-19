@@ -58,7 +58,8 @@ gem 'seed-fu'
 gem 'config'
 
 # datepicker
-gem 'bootstrap4-datetime-picker-rails'
+gem 'pickadate-rails'
+gem "font-awesome-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

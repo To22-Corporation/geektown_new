@@ -5,11 +5,9 @@
   .form-group
     = f.label :description, "詳細"
     = f.text_area :description, class: "form-control", placeholder: "詳細を入力してください", required: true, rows: 5
-  .form-group
-    = f.label :name, "閉鎖日時"
-    = f.text_field :name, class: "form-control", placeholder: "グループ名を入力してください", required: true
+  fieldset.form-group
+    = f.label :date, "閉鎖日時"
+    = f.text_field :date, class: "form-control", id: "pickadate", placeholder: "日付を入力してください", required: true
 
   .actions.mt-4
     = f.submit "Save", class: "btn btn-lg btn-primary btn-block"
-
-link rel="stylesheet" href="build/css/bootstrap-datetimepicker.min.css"
