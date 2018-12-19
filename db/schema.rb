@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_164305) do
   create_table "participations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "group_id", null: false
     t.integer "user_id", null: false
+    t.boolean "is_owner", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
