@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
-      current_user.participations.create(group_id: @group.id, is_owner: true)
+      @group.build_ownership(user_id: current_user.id).save
       redirect_to({ action: 'edit', id: @group.id }, notice: 'グループを作成しました')
     else
       render :new
