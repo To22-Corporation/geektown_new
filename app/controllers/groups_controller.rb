@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+  before_action :owner?, only: %i[edit update]
+
   def new
     @group = Group.new
   end
@@ -36,5 +38,9 @@ class GroupsController < ApplicationController
       :close_at,
       group_skills_attributes: %i[id group_id level _destroy]
     )
+  end
+
+  def owner?
+    redirect_to({ action: :new }, alert: '編集権限がありません') unless current_user.owning_group_ids.include?(params["id"].to_i)
   end
 end

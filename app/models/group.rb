@@ -2,7 +2,7 @@ class Group < ApplicationRecord
   has_many :group_skills, dependent: :destroy
   has_many :skills, through: :group_skills
 
-  has_one :ownership, ->(user) { where(is_owner: user.id) }, inverse_of: :group, dependent: :destroy, class_name: "Participation"
+  has_one :ownership, -> { where(is_owner: true).limit(1) }, inverse_of: :group, dependent: :destroy, class_name: "Participation"
   has_one :owner, through: :ownership, source: :user
 
   has_many :participations, dependent: :destroy
