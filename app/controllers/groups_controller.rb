@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
-      redirect_to({ action: 'edit', id: @group.id }, notice: '更新完了しました')
+      redirect_to({ action: 'edit', id: @group.id }, notice: 'グループを作成しました')
     else
       render :new
     end
@@ -17,6 +17,12 @@ class GroupsController < ApplicationController
   end
 
   def update
+    @group = Group.find(params[:id])
+    if @group.update(group_params)
+      redirect_to({ action: 'edit', id: @group.id }, notice: 'グループを編集しました')
+    else
+      render :update
+    end
   end
 
   private

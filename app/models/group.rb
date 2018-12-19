@@ -10,5 +10,5 @@ class Group < ApplicationRecord
   validates :close_at, presence: true
   validates :limited_number, presence: true, numericality: { only_integer: true }
 
-  attribute :close_at, :formatted_date
+  attribute :close_at, :formatted_date, default: nil
 end
