@@ -13,6 +13,9 @@
 #= require rails-ujs
 #= require activestorage
 #= require jquery3
-#= require_tree .
 #= require popper
 #= require bootstrap-sprockets
+#= require pickadate/picker
+#= require pickadate/picker.date
+#= require pickadate/translations/ja_JP
+#= require_tree .

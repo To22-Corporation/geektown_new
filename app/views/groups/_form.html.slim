@@ -1,0 +1,16 @@
+= form_with model: @group, local: true do |f|
+  .form-group
+    = f.label :name, "グループ名"
+    = f.text_field :name, class: "form-control", placeholder: "グループ名を入力してください", required: true
+  .form-group
+    = f.label :description, "詳細"
+    = f.text_area :description, class: "form-control", placeholder: "詳細を入力してください", required: true, rows: 5
+  fieldset.form-group
+    = f.label :close_at, "閉鎖日"
+    = f.text_field :close_at, class: "form-control", id: "pickadate", placeholder: "日付を入力してください", required: true
+  .form-group
+    = f.label :limited_number, "制限人数"
+    = f.number_field :limited_number, class: "form-control", placeholder: "制限人数を入力してください", required: true
+
+  .actions.mt-4
+    = f.submit "Save", class: "btn btn-lg btn-primary btn-block"
