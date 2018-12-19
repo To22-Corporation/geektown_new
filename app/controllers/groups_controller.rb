@@ -28,6 +28,10 @@ class GroupsController < ApplicationController
     end
   end
 
+  def index
+    @groups = Group.all
+  end
+
   private
 
   def group_params
