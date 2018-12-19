@@ -6,4 +6,9 @@ class Group < ApplicationRecord
   has_many :users, through: :participations
 
   validates :name, presence: true, uniqueness: true
+  validates :description, presence: true
+  validates :close_at, presence: true
+  validates :limited_number, presence: true, numericality: { only_integer: true }
+
+  attribute :close_at, :formatted_date
 end
