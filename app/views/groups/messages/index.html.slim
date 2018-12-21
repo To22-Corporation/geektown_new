@@ -10,13 +10,13 @@ h1 チャットルーム
 .mesgs
   .msg_history
     - @messages.each do |message|
-      - if message.user.id = current_user.id
+      - if message.user == current_user
         .outgoing_msg
           .sent_msg
             p =message.content
             span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
       - else
-        .incoming_msg
+        .incoming_msg.mb-4
           .incoming_msg_img
             img alt="sunil" src="https://ptetutorials.com/images/user-profile.png" /
           .received_msg

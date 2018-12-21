@@ -9,7 +9,8 @@ class Groups::MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     if @message.save
-      current_user.participations.where(group_id: params["group_id"]).first.messages << @message
+      participation = current_user.participations.where(group_id: params["group_id"]).first
+      participation.messages << @message if participation
       redirect_to action: :index
     else
       render :index
