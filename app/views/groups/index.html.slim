@@ -1,0 +1,15 @@
+h1 グループ一覧
+
+- @groups.each do |group|
+  .card.mt-4
+    .card-header.text-white.bg-primary
+      h4.text-center
+        = link_to group.name, group_path(group.id), class: 'text-white'
+    .card-body.container.testimonial-group
+      .row.flex-nowrap.pb-3
+        - group.users.each do |user|
+          .col-3.col-sm-3.col-md-2.col-lg-2.text-center
+            a href=user_profile_path(user.id)
+              img.rounded-circle.img-fluid src="http://i.pravatar.cc/120"
+      br
+      = "最後のチャット入れる"
