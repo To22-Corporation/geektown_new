@@ -11,6 +11,6 @@ Rails.application.routes.draw do
     resource :profile, only: %i[new create edit update show]
   end
   resources :groups, module: :groups, only: %i[new create edit update index show] do
-    resources :messages, only: %i[index]
+    resources :messages, only: %i[index create]
   end
 end
