@@ -9,42 +9,20 @@ h1 チャットルーム
 
 .mesgs
   .msg_history
-    .incoming_msg
-      .incoming_msg_img
-        img alt="sunil" src="https://ptetutorials.com/images/user-profile.png" /
-      .received_msg
-        .received_withd_msg
-          p
-            | Test which is a new approach to have all
-            | solutions
-          span.time_date 11:01 AM    |    June 9
-    .outgoing_msg
-      .sent_msg
-        p
-          | Test which is a new approach to have all
-          | solutions
-        span.time_date 11:01 AM    |    June 9
-    .incoming_msg
-      .incoming_msg_img
-        img alt="sunil" src="https://ptetutorials.com/images/user-profile.png" /
-      .received_msg
-        .received_withd_msg
-          p Test, which is a new approach to have
-          span.time_date 11:01 AM    |    Yesterday
-    .outgoing_msg
-      .sent_msg
-        p Apollo University, Delhi, India Test
-        span.time_date 11:01 AM    |    Today
-    .incoming_msg
-      .incoming_msg_img
-        img alt="sunil" src="https://ptetutorials.com/images/user-profile.png" /
-      .received_msg
-        .received_withd_msg
-          p
-            | We work directly with our designers and suppliers,
-            | and sell direct to you, which means quality, exclusive
-            | products, at a price anyone can afford.
-          span.time_date 11:01 AM    |    Today
+    - @messages.each do |message|
+      - if message.user.id = current_user.id
+        .outgoing_msg
+          .sent_msg
+            p =message.content
+            span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+      - else
+        .incoming_msg
+          .incoming_msg_img
+            img alt="sunil" src="https://ptetutorials.com/images/user-profile.png" /
+          .received_msg
+            .received_withd_msg
+              p =message.content
+              span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
   .type_msg
     = form_with model: @message, url: group_messages_path, local: true do |form|
       .input_msg_write
