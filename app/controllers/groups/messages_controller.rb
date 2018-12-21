@@ -1,4 +1,6 @@
 class Groups::MessagesController < ApplicationController
+  before_action :participated?, only: %i[index create]
+
   def index
     @group = Group.find(params[:group_id])
     @messages = @group.messages
@@ -23,5 +25,9 @@ class Groups::MessagesController < ApplicationController
     params.require(:message).permit(
       :content
     )
+  end
+
+  def participated?
+    redirect_to group_path(params[:group_id]) unless current_user.group_ids.include?(params[:group_id].to_i)
   end
 end
