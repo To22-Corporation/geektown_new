@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_many :participations, dependent: :destroy
   has_many :groups, through: :participations
 
+  has_many :message_participations, through: :participations
+  has_many :messages, through: :message_participations
+
   has_many :ownerships, ->(user) { where(is_owner: true, user_id: user.id) }, inverse_of: :group, dependent: :destroy, class_name: "Participation"
   has_many :owning_groups, through: :ownerships, source: :group
 

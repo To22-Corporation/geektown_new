@@ -23,7 +23,7 @@
 
     - if @group.user_ids.include?(current_user.id)
       br
-      = link_to "チャットルーム", groups_path, class: "btn btn-success float-right mt-4"
+      = link_to "チャットルーム", group_messages_path(@group.id), class: "btn btn-success float-right mt-4"
 
     - elsif @group.users.count <= @group.limited_number
       br

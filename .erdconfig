@@ -17,8 +17,6 @@ title: GeekTown ERD
 exclude:
   - ActiveRecord::InternalMetadata
   - ActiveRecord::SchemaMigration
-  - ActiveStorage::Blob
-  - ActiveStorage::Attachment
 
 only: null
 only_recursion_depth: null

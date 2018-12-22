@@ -1,0 +1,31 @@
+h1 チャットルーム
+
+- if @message.errors.any?
+  #error_explanation
+    h2 = "#{pluralize(@message.errors.count, "error")} prohibited this user from being saved:"
+    ul
+      - @message.errors.full_messages.each do |message|
+        li = message
+
+.mesgs
+  .msg_history
+    - @messages.each do |message|
+      - if message.user == current_user
+        .outgoing_msg
+          .sent_msg
+            p =message.content
+            span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+      - else
+        .incoming_msg.mb-4
+          .incoming_msg_img
+            img alt="sunil" src="https://ptetutorials.com/images/user-profile.png" /
+          .received_msg
+            .received_withd_msg
+              p =message.content
+              span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+  .type_msg
+    = form_with model: @message, url: group_messages_path, local: true do |form|
+      .input_msg_write
+        = form.text_field :content, class: 'write_msg', placeholder: "Type a message"
+        button.msg_send_btn type="submit"
+          i.fa.fa-paper-plane-o aria-hidden="true"

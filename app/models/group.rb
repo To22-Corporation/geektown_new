@@ -8,6 +8,9 @@ class Group < ApplicationRecord
   has_many :participations, dependent: :destroy
   has_many :users, through: :participations
 
+  has_many :message_participations, through: :participations
+  has_many :messages, through: :message_participations
+
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
   validates :close_at, presence: true
