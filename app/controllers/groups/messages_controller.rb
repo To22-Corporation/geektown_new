@@ -2,9 +2,7 @@ class Groups::MessagesController < ApplicationController
   before_action :participated?, only: %i[index create]
 
   def index
-    @group = Group.find(params[:group_id])
-    @messages = @group.messages
-    @users = @group.users
+    set_master
     @message = Message.new
   end
 
@@ -15,6 +13,7 @@ class Groups::MessagesController < ApplicationController
       participation.messages << @message if participation
       redirect_to action: :index
     else
+      set_master
       render :index
     end
   end
@@ -29,5 +28,11 @@ class Groups::MessagesController < ApplicationController
 
   def participated?
     redirect_to group_path(params[:group_id]) unless current_user.group_ids.include?(params[:group_id].to_i)
+  end
+
+  def set_master
+    @group = Group.find(params[:group_id])
+    @messages = @group.messages
+    @users = @group.users
   end
 end
