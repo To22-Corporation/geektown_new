@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resource :registration, only: %i[new create]
   resources :users, module: :users, only: %i[index] do
     resource :profile, only: %i[new create edit update show]
+  end
+
+  namespace :user do
     resources :groups, only: %i[index destroy]
   end
 
