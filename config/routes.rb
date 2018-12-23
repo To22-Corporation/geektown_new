@@ -11,7 +11,11 @@ Rails.application.routes.draw do
     resource :profile, only: %i[new create edit update show]
   end
 
-  resources :groups, only: %i[new create edit update index show] do
+  namespace :user do
+    resources :groups, only: %i[create index destroy]
+  end
+
+  resources :groups, only: %i[new create edit update index show destroy] do
     scope module: :groups do
       resources :messages, only: %i[index create]
     end

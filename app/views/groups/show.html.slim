@@ -3,28 +3,36 @@
   .card-body
     .align-middle
       h5.card-title ="#{@group.description}"
-      .row.flex-nowrap.pb-3
+      .row.flex-nowrap
         - @group.users.each do |user|
           .col-3.col-sm-3.col-md-2.col-lg-2.text-center
             a href=user_profile_path(user.id)
               img.rounded-circle.img-fluid src="http://i.pravatar.cc/120"
             p =user.profile.name if user.profile
-      = "最後のチャット入れる"
 
     - if @group.users.count == @group.limited_number
-      button.btn.btn-danger type="button" disabled="disabled"
-        | 制限人数&nbsp;
-        span.badge.badge-light ="#{@group.users.count} / #{@group.limited_number}"
+      p
+        span.badge.badge-danger.mr-2 制限人数
+        ="#{@group.users.count} / #{@group.limited_number}"
 
     - else
       button.btn.btn-primary type="button" disabled="disabled"
         | 制限人数&nbsp;
         span.badge.badge-light ="#{@group.users.count} / #{@group.limited_number}"
 
+    p
+      span.badge.badge-info.mr-2 最新メッセージ
+      =@group.last_message.first.content if @group.last_message.present?
+
     - if @group.user_ids.include?(current_user.id)
+      = link_to "チャットルーム", group_messages_path(@group.id), class: "btn btn-success mt-2"
       br
-      = link_to "チャットルーム", group_messages_path(@group.id), class: "btn btn-success float-right mt-4"
+      - if @group.owner == current_user
+        = link_to "グループを削除する", group_path(@group.id), class: "btn btn-danger mt-2", method: :delete
+      - else
+        = link_to "グループから抜ける", user_group_path(@group.id), class: "btn btn-danger mt-2", method: :delete
 
     - elsif @group.users.count <= @group.limited_number
-      br
-      = link_to "グループに参加する", groups_path, class: "btn btn-success float-right mt-4"
+      = form_with url: user_groups_path, local: true do |form|
+        = form.hidden_field "group[id]", value: @group.id
+        = form.submit "グループに参加する", class: "btn btn-success mt-4"

@@ -1,0 +1,31 @@
+.card
+  h4.card-header.bg-primary.text-white =@group.name
+  .card-body
+    .align-middle
+      h5.card-title ="#{@group.description}"
+      .row.flex-nowrap
+        - @group.users.each do |user|
+          .col-3.col-sm-3.col-md-2.col-lg-2.text-center
+            a href=user_profile_path(user.id)
+              img.rounded-circle.img-fluid src="http://i.pravatar.cc/120"
+            p =user.profile.name if user.profile
+      span.badge.badge-info 最新メッセージ
+      span.badge.badge-light.mb-3 =@group.last_message.first.content if @group.last_message.present?
+
+    - if @group.users.count == @group.limited_number
+      button.btn.btn-danger type="button" disabled="disabled"
+        | 制限人数&nbsp;
+        span.badge.badge-light ="#{@group.users.count} / #{@group.limited_number}"
+
+    - else
+      button.btn.btn-primary type="button" disabled="disabled"
+        | 制限人数&nbsp;
+        span.badge.badge-light ="#{@group.users.count} / #{@group.limited_number}"
+
+    - if @group.user_ids.include?(current_user.id)
+      br
+      = link_to "チャットルーム", group_messages_path(@group.id), class: "btn btn-success float-right mt-4"
+
+    - elsif @group.users.count <= @group.limited_number
+      br
+      = link_to "グループに参加する", groups_path, class: "btn btn-success float-right mt-4"

@@ -36,6 +36,15 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
+  def destroy
+    @group = Group.find(params[:id])
+    if @group.destroy
+      redirect_to(user_groups_path, notice: 'グループを削除しました')
+    else
+      render :show
+    end
+  end
+
   private
 
   def group_params
