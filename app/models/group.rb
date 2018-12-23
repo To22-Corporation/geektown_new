@@ -10,6 +10,7 @@ class Group < ApplicationRecord
 
   has_many :message_participations, through: :participations
   has_many :messages, through: :message_participations
+  has_many :last_message, -> { order(created_at: "DESC").limit(1) }, through: :message_participations, source: :message
 
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true

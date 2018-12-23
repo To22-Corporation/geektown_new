@@ -3,13 +3,14 @@
   .card-body
     .align-middle
       h5.card-title ="#{@group.description}"
-      .row.flex-nowrap.pb-3
+      .row.flex-nowrap
         - @group.users.each do |user|
           .col-3.col-sm-3.col-md-2.col-lg-2.text-center
             a href=user_profile_path(user.id)
               img.rounded-circle.img-fluid src="http://i.pravatar.cc/120"
             p =user.profile.name if user.profile
-      = "最後のチャット入れる"
+      span.badge.badge-info 最新メッセージ
+      span.badge.badge-light.mb-3 =@group.last_message.first.content if @group.last_message.present?
 
     - if @group.users.count == @group.limited_number
       button.btn.btn-danger type="button" disabled="disabled"
