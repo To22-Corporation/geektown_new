@@ -9,28 +9,23 @@
             a href=user_profile_path(user.id)
               img.rounded-circle.img-fluid src="http://i.pravatar.cc/120"
             p =user.profile.name if user.profile
+      span.badge.badge-info 最新メッセージ
+      span.badge.badge-light.mb-3 =@group.last_message.first.content if @group.last_message.present?
 
     - if @group.users.count == @group.limited_number
-      p
-        span.badge.badge-danger.mr-2 制限人数
-        ="#{@group.users.count} / #{@group.limited_number}"
+      button.btn.btn-danger type="button" disabled="disabled"
+        | 制限人数&nbsp;
+        span.badge.badge-light ="#{@group.users.count} / #{@group.limited_number}"
 
     - else
       button.btn.btn-primary type="button" disabled="disabled"
         | 制限人数&nbsp;
         span.badge.badge-light ="#{@group.users.count} / #{@group.limited_number}"
 
-    p
-      span.badge.badge-info.mr-2 最新メッセージ
-      =@group.last_message.first.content if @group.last_message.present?
-
     - if @group.user_ids.include?(current_user.id)
-      = link_to "チャットルーム", group_messages_path(@group.id), class: "btn btn-success mt-2"
       br
-      - if @group.owner == current_user
-        = link_to "グループを削除する", group_messages_path(@group.id), class: "btn btn-danger mt-2"
-      - else
-        = link_to "グループから抜ける", group_messages_path(@group.id), class: "btn btn-danger mt-2"
+      = link_to "チャットルーム", group_messages_path(@group.id), class: "btn btn-success float-right mt-4"
 
     - elsif @group.users.count <= @group.limited_number
-      = link_to "グループに参加する", groups_path, class: "btn btn-success mt-4"
+      br
+      = link_to "グループに参加する", groups_path, class: "btn btn-success float-right mt-4"
