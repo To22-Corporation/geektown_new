@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :groups, only: %i[index destroy]
   end
 
-  resources :groups, only: %i[new create edit update index show] do
+  resources :groups, only: %i[new create edit update index show destroy] do
     scope module: :groups do
       resources :messages, only: %i[index create]
     end
