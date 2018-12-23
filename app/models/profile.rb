@@ -1,4 +1,6 @@
 class Profile < ApplicationRecord
+  mount_uploader :image, ImageUploader
+
   # Relations
   belongs_to :user
   belongs_to :university

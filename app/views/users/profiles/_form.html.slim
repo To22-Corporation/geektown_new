@@ -1,4 +1,10 @@
 = form_with model: @profile, url: user_profile_path, local: true do |f|
+  .image
+    - if @profile.image?
+      = image_tag @profile.image.url, class: "img-thumbnail"
+    - else
+  = f.file_field :image, class: "mb-2"
+
   .form-group.row
     = f.label :name, "名前", class: 'col-form-label col-2'
     .col-10
