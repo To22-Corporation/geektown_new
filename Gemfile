@@ -53,13 +53,15 @@ gem 'jquery-rails'
 # seed master data
 gem 'seed-fu'
 
-
 # config const
 gem 'config'
 
 # datepicker
 gem 'pickadate-rails'
 gem "font-awesome-rails"
+
+# carrierwave
+gem "carrierwave"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
