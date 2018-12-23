@@ -7,7 +7,7 @@ h1 チャットルーム
       - @message.errors.full_messages.each do |message|
         li = message
 
-.mesgs
+.mesgs.bg-white
   .msg_history
     - @messages.each do |message|
       - if message.user == current_user

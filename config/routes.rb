@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   namespace :user do
-    resources :groups, only: %i[index destroy]
+    resources :groups, only: %i[create index destroy]
   end
 
   resources :groups, only: %i[new create edit update index show destroy] do

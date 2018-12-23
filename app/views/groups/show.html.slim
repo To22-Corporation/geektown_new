@@ -30,7 +30,9 @@
       - if @group.owner == current_user
         = link_to "グループを削除する", group_path(@group.id), class: "btn btn-danger mt-2", method: :delete
       - else
-        = link_to "グループから抜ける", user_group_path(@group.id), class: "btn btn-danger mt-2"
+        = link_to "グループから抜ける", user_group_path(@group.id), class: "btn btn-danger mt-2", method: :delete
 
     - elsif @group.users.count <= @group.limited_number
-      = link_to "グループに参加する", groups_path, class: "btn btn-success mt-4"
+      = form_with url: user_groups_path, local: true do |form|
+        = form.hidden_field "group[id]", value: @group.id
+        = form.submit "グループに参加する", class: "btn btn-success mt-4"
