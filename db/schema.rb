@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_23_151141) do
+ActiveRecord::Schema.define(version: 2018_12_25_213020) do
 
   create_table "faculties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 2018_12_23_151141) do
     t.string "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "type", default: 0
+    t.index ["type"], name: "index_messages_on_type"
   end
 
   create_table "participations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
