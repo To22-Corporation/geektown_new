@@ -24,10 +24,11 @@ class GroupsController < ApplicationController
       end
     end
 
-    if level_flag && @group.save
+    if @group.save
       @group.build_ownership(user_id: current_user.id).save
       redirect_to("/groups/#{@group.id}/messages", notice: 'グループを作成しました')
     else
+      set_master
       render :new
     end
   end

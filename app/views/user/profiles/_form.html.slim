@@ -1,4 +1,6 @@
+= render 'shared/error', model: @profile
 = form_with model: @profile, url: user_profile_path, local: true do |f|
+
   .image.text-center
     - if @profile.image?
       = image_tag @profile.image.thumb.url, class: "img-thumbnail"

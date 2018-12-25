@@ -31,9 +31,11 @@ class User::ProfilesController < ApplicationController
   end
 
   def update
-    if current_user.profile.update(profile_params)
+    @profile = current_user.profile
+    if @profile.update(profile_params)
       redirect_to({ action: 'show' }, notice: '更新完了しました')
     else
+      set_master
       render :new
     end
   end
