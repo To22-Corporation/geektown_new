@@ -18,7 +18,8 @@ h4 =@group.name
       - else
         .incoming_msg.mb-4
           .incoming_msg_img
-            img alt="sunil" src=message.user.profile.image.thumb50 /
+            = link_to "/users/#{message.user.id}/profile"
+              img alt="image" src=message.user.profile.image.thumb30 /
           .received_msg
             .received_withd_msg
               p =message.content
