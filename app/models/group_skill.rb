@@ -7,6 +7,6 @@ class GroupSkill < ApplicationRecord
   validate :check_level
 
   def check_level
-    errors.add(:skill, 'スキルレベルは1以上5以下で選択してください') unless 1..5.include?(level)
+    errors.add(:skill, 'スキルレベルは1以上5以下で選択してください') unless (1..5).include?(level)
   end
 end
