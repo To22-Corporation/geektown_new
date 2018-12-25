@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'users/profiles#new'
+  root 'groups#index'
   get 'login' => 'users/sessions#new', as: :new_login
   post 'login' => 'users/sessions#create'
   post 'logout' => 'users/sessions#destroy'
