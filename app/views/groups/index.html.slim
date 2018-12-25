@@ -1,3 +1,9 @@
+form.form-group.form-inline
+  = select :group, :skill, @skills.map{|skill| [skill.name, skill.id]}, { selected: @selected_skill_ids, placeholder: "絞り込むスキルを選択してください"} , class: "form-control col-6 select-multiple", multiple: "multiple"
+  span.input-group-addon
+    button.btn.btn-default type="submit"
+      span.fa.fa-search
+
 h4 グループ一覧
 
 - @groups.each do |group|
@@ -12,8 +18,15 @@ h4 グループ一覧
             a href=user_profile_path(user.id)
               img.img-thumbnail.img-fluid src=user.profile.image.thumb100.url
       br
+      - if group.group_skills.present?
+        .mb-2
+          span.badge.badge-info.mr-2 必要スキル
+          - group.group_skills.each do |group_skill|
+            button.btn.mr-2 disabled='disabled' class="btn-#{Settings.skill.color_class[group_skill.level-1]}"
+              = group_skill.skill.name
+              span.badge.badge-light.ml-2 =group_skill.level
       p
         span.badge.badge-info.mr-2 最新メッセージ
         = group.last_message.first.content if group.last_message.present?
 
-= link_to "new", new_group_path, class: "btn btn-primary text-white"
+= link_to "グループを作成する", new_group_path, class: "btn btn-primary text-white mt-2"
