@@ -13,7 +13,7 @@ h4 =@group.name
       - if message.user == current_user
         .outgoing_msg
           .sent_msg
-            p.text-justify =message.content
+            p =simple_format("#{message.content}")
             span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
       - else
         .incoming_msg.mb-4
@@ -22,7 +22,7 @@ h4 =@group.name
               img alt="image" src=message.user.profile.image.thumb30 /
           .received_msg
             .received_withd_msg
-              p.text-justify =message.content
+              p =simple_format("#{message.content}")
               span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
   .type_msg
     = form_with model: @message, url: group_messages_path, local: true do |form|
