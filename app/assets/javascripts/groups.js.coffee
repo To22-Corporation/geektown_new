@@ -6,3 +6,5 @@ $ ->
     hiddenSuffix: '',
     min: new Date()
   )
+
+  $('.js-example-basic-multiple').select2()

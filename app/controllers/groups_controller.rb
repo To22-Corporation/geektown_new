@@ -34,6 +34,7 @@ class GroupsController < ApplicationController
   end
 
   def index
+    @skills = Skill.all
     @groups = Group.all
   end
 
