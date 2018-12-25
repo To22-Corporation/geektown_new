@@ -8,6 +8,7 @@ class Groups::MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)
+    binding.pry
     if @message.save
       participation = current_user.participations.where(group_id: params["group_id"]).first
       participation.messages << @message if participation
@@ -21,8 +22,9 @@ class Groups::MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(
-      :content
+    params.require(:chat).permit(
+      :content,
+      :type
     )
   end
 

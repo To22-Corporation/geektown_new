@@ -10,10 +10,9 @@ $ ->
   $('.select-multiple').select2()
 
   $('.question_btn').click ->
-    type = $('#message_type').val() == 'true'
-    $('#message_type').val(!type)
-    if (type)
+    if ($('#chat_type').val() == 'Question')
       $('.question_btn').css('background', '#05728f none repeat scroll 0 0');
+      $('#chat_type').val('Chat')
       $('#status-area').flash_message
         text: '質問モードを解除しました'
         how: 'append'
@@ -21,6 +20,7 @@ $ ->
       return
     else
       $('.question_btn').css('background', '#da4a16 none repeat scroll 0 0');
+      $('#chat_type').val('Question')
       $('#status-area').flash_message
         text: '質問モードです'
         how: 'append'
