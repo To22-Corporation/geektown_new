@@ -12,18 +12,28 @@ h4 =@group.name
     - @messages.each do |message|
       - if message.user == current_user
         .outgoing_msg
-          .sent_msg
-            p =simple_format("#{message.content}")
-            span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+          - if message.type == 'Chat'
+            .sent_msg_chat
+              p =simple_format("#{message.content}")
+              span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+          - else
+            .sent_msg_question
+              p =simple_format("#{message.content}")
+              span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
       - else
         .incoming_msg.mb-4
           .incoming_msg_img
             = link_to "/users/#{message.user.id}/profile"
               img alt="image" src=message.user.profile.image.thumb30 /
           .received_msg
-            .received_withd_msg
-              p =simple_format("#{message.content}")
-              span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+            - if message.type == 'Chat'
+              .received_withd_msg
+                p =simple_format("#{message.content}")
+                span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+            - else
+              .received_withd_msg_question
+                p =simple_format("#{message.content}")
+                span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
   .position-fixed.bg-info#status-area
   .type_msg
     = form_with model: @message, url: group_messages_path, local: true do |form|
