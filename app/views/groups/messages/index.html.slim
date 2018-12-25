@@ -28,6 +28,6 @@ h4 =@group.name
     = form_with model: @message, url: group_messages_path, local: true do |form|
       .input_msg_write
         input type="text" name="dummy" style="display:none;"
-        = form.text_field :content, class: 'write_msg', placeholder: "Type a message"
+        = form.text_area :content, class: 'write_msg', placeholder: "Type a message", rows: "2"
         button.msg_send_btn type="button" onclick="submit();"
           i.fa.fa-paper-plane-o aria-hidden="true"
