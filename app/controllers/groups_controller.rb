@@ -35,7 +35,8 @@ class GroupsController < ApplicationController
 
   def index
     @skills = Skill.all
-    @selected_skill_ids = params["group"]["skill"].map(&:to_i).reject { |i| i <= 0 }
+    @selected_skill_ids = params.has_key?("group") ? params["group"]["skill"] : []
+    @selected_skill_ids.map!(&:to_i).reject! { |i| i <= 0 }
     @groups = Group.includes(:skills).where(skills: { id: @selected_skill_ids.presence || @selected_skill_ids.present? ? @selected_skill_ids : @skills.map(&:id) })
   end
 

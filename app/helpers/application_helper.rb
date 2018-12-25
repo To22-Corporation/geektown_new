@@ -7,4 +7,13 @@ module ApplicationHelper
     end
     link_to(name, '#', class: "add_fields #{class_attributes}" + class_attributes, data: { id: id, fields: fields.gsub('\n', '') })
   end
+
+  def check_skill_level(group, user)
+    group_skills = group.group_skills
+    profile_skills = user.profile.profile_skills
+    group_skills.each do |group_skill|
+      profile_skill = profile_skills.find_by(skill_id: group_skill.skill_id)
+      return false unless profile_skill && profile_skill.level >= group_skill.level
+    end
+  end
 end
