@@ -12,5 +12,12 @@
     = f.label :limited_number, "制限人数"
     = f.number_field :limited_number, class: "form-control", placeholder: "制限人数を入力してください", required: true
 
+  .card.mb-4
+    = f.label :group_skills, 'スキル', class: 'card-header'
+    = f.fields_for :group_skills do |g|
+      ul.list-group.list-group-flush
+        = render "group_skill_fields", f: g
+    = link_to_add_fields "スキル追加", f, :group_skills, 'btn-default btn'
+
   .actions.mt-4
     = f.submit "Save", class: "btn btn-lg btn-primary btn-block"
