@@ -6,6 +6,7 @@ LABEL version="1.0"
 RUN apt-get update -qq && \
     apt-get install -y build-essential \
                        default-libmysqlclient-dev \
+		       imagemagick \
                        graphviz
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \

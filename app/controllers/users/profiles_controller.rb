@@ -42,6 +42,7 @@ class Users::ProfilesController < ApplicationController
 
   def profile_params
     params.require(:profile).permit(
+      :image,
       :name,
       :university_id,
       :faculty_id,
