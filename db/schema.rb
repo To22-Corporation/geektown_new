@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2018_12_23_151141) do
     t.boolean "is_owner", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["group_id", "user_id"], name: "index_participations_on_group_id_and_user_id", unique: true
   end
 
   create_table "profile_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
