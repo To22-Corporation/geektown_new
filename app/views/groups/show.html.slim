@@ -7,7 +7,7 @@
         - @group.users.each do |user|
           .col-3.col-sm-3.col-md-2.col-lg-2.text-center
             a href=user_profile_path(user.id)
-              img.rounded-circle.img-fluid src="http://i.pravatar.cc/120"
+              img.img-thumbnail.img-fluid src=user.profile.image.thumb.url
             p =user.profile.name if user.profile
 
     - if @group.users.count == @group.limited_number
