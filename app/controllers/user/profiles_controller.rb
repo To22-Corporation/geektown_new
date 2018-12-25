@@ -2,7 +2,8 @@
 
 class User::ProfilesController < ApplicationController
   before_action :profile?, only: %i[new create]
-  before_action :no_profile?, only: %i[edit update show]
+
+  skip_before_action :require_profile, only: %i[new create]
 
   def new
     set_master
@@ -52,10 +53,6 @@ class User::ProfilesController < ApplicationController
 
   def profile?
     redirect_to action: :edit if current_user.profile
-  end
-
-  def no_profile?
-    redirect_to action: :new unless current_user.profile
   end
 
   def set_master

@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
-  before_action :owner?, only: %i[edit update]
+  before_action :owner?, only: %i[edit update destroy]
+
+  skip_before_action :require_profile, only: %i[index show]
 
   def new
     @group = Group.new

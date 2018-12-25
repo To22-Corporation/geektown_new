@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < ApplicationController
-  skip_before_action :require_login, except: [:destroy]
+  skip_before_action :require_login, except: %i[destroy]
+  skip_before_action :require_profile
 
   def new
     @user = User.new
