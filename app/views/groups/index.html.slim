@@ -1,4 +1,4 @@
-h1 グループ一覧
+h4 グループ一覧
 
 - @groups.each do |group|
   .card.mt-4
@@ -15,3 +15,5 @@ h1 グループ一覧
       p
         span.badge.badge-info.mr-2 最新メッセージ
         = group.last_message.first.content if group.last_message.present?
+
+= link_to "new", new_group_path, class: "btn btn-primary text-white"

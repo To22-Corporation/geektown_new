@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_profile
-    redirect_to new_user_profile_path, alert: 'purofi-rukinyuuしてください'
+    redirect_to new_user_profile_path, alert: 'purofi-rukinyuuしてください' unless current_user.profile
   end
 end
