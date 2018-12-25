@@ -1,7 +1,7 @@
 = form_with model: @profile, url: user_profile_path, local: true do |f|
-  .image
+  .image.text-center
     - if @profile.image?
-      = image_tag @profile.image.url, class: "img-thumbnail"
+      = image_tag @profile.image.thumb.url, class: "img-thumbnail"
     - else
   = f.file_field :image, class: "mb-2"
 

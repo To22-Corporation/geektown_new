@@ -1,15 +1,11 @@
-.row.justify-content-center
-  .col-6
-    // h1.h3.mb-3.font-weight-normal.text-center
-      | プロフィール
-    .card
-      h4.card-header.bg-dark.text-white =@user.profile.name
-      .card-body
-        .image.float-left.user-l style="padding-right: 10px;"
-          img.img-thumbnail src="http://i.pravatar.cc/120"
-        .align-middle
-          h5.card-title ="#{@user.profile.university.name}・#{@user.profile.faculty.name}"
-          - @user.profile.profile_skills.each do |profile_skill|
-            button.btn.mr-2 disabled='disabled' class="btn-#{Settings.skill.color_class[profile_skill.level-1]}"
-              = profile_skill.skill.name
-              span.badge.badge-light.ml-2 =profile_skill.level
+.card
+  h4.card-header.bg-dark.text-white =@user.profile.name
+  .card-body
+    .image.float-left.user-l.mb-2 style="padding-right: 10px;"
+      img.img-thumbnail src=@user.profile.image.thumb.url
+    .align-middle.mt-4
+      h5.card-title ="#{@user.profile.university.name}・#{@user.profile.faculty.name}"
+      - @user.profile.profile_skills.each do |profile_skill|
+        button.btn.mr-2 disabled='disabled' class="btn-#{Settings.skill.color_class[profile_skill.level-1]}"
+          = profile_skill.skill.name
+          span.badge.badge-light.ml-2 =profile_skill.level
