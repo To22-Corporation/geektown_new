@@ -4,23 +4,36 @@ class GroupsController < ApplicationController
   skip_before_action :require_profile, only: %i[index show]
 
   def new
-    @skills = Skill.all
+    set_master
     @group = Group.new
     @group.group_skills.build
   end
 
   def create
     @group = Group.new(group_params)
-    if @group.save
+
+    # level check
+    level_flag = true
+    group_skills = @group.group_skills
+    profile_skills = current_user.profile.profile_skills
+    group_skills.each do |group_skill|
+      profile_skill = profile_skills.find_by(skill_id: group_skill.skill_id)
+      unless profile_skill && profile_skill.level >= group_skill.level
+        level_flag = false
+        break
+      end
+    end
+
+    if level_flag && @group.save
       @group.build_ownership(user_id: current_user.id).save
-      redirect_to({ action: 'edit', id: @group.id }, notice: 'グループを作成しました')
+      redirect_to("/groups/#{@group.id}/messages", notice: 'グループを作成しました')
     else
       render :new
     end
   end
 
   def edit
-    @skills = Skill.all
+    set_master
     @group = Group.find(params[:id])
   end
 
@@ -34,7 +47,7 @@ class GroupsController < ApplicationController
   end
 
   def index
-    @skills = Skill.all
+    set_master
     @selected_skill_ids = params.has_key?("group") ? params["group"]["skill"] : []
     @selected_skill_ids.map!(&:to_i).reject! { |i| i <= 0 }
     @groups = Group.includes(:skills).where(skills: { id: @selected_skill_ids.presence || @selected_skill_ids.present? ? @selected_skill_ids : @skills.map(&:id) })
@@ -54,6 +67,10 @@ class GroupsController < ApplicationController
   end
 
   private
+
+  def set_master
+    @skills = Skill.all
+  end
 
   def group_params
     params.require(:group).permit(
