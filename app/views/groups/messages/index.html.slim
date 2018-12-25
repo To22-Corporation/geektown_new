@@ -13,7 +13,7 @@ h4 =@group.name
       - if message.user == current_user
         .outgoing_msg
           .sent_msg
-            p =message.content
+            p.text-justify =message.content
             span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
       - else
         .incoming_msg.mb-4
@@ -22,11 +22,12 @@ h4 =@group.name
               img alt="image" src=message.user.profile.image.thumb30 /
           .received_msg
             .received_withd_msg
-              p =message.content
+              p.text-justify =message.content
               span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
   .type_msg
     = form_with model: @message, url: group_messages_path, local: true do |form|
       .input_msg_write
+        input type="text" name="dummy" style="display:none;"
         = form.text_field :content, class: 'write_msg', placeholder: "Type a message"
-        button.msg_send_btn type="submit"
+        button.msg_send_btn type="button" onclick="submit();"
           i.fa.fa-paper-plane-o aria-hidden="true"
