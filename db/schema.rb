@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2018_12_23_151141) do
   create_table "group_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "group_id", null: false
     t.integer "skill_id", null: false
+    t.integer "level", limit: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

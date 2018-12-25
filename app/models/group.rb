@@ -1,6 +1,7 @@
 class Group < ApplicationRecord
   has_many :group_skills, dependent: :destroy
   has_many :skills, through: :group_skills
+  accepts_nested_attributes_for :group_skills, allow_destroy: true, reject_if: :all_blank
 
   has_one :ownership, -> { where(is_owner: true).limit(1) }, inverse_of: :group, dependent: :destroy, class_name: "Participation"
   has_one :owner, through: :ownership, source: :user

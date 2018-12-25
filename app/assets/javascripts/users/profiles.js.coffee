@@ -1,6 +1,6 @@
 $ ->
   $('form').on 'click', '.remove_fields', (event) ->
-    console.log($(this).prev('input[type=hidden]').val('1'))
+    console.log("clicl")
     $(this).prev('input[type=hidden]').val('1')
     $(this).closest('ul').hide()
     event.preventDefault()

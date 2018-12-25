@@ -4,7 +4,9 @@ class GroupsController < ApplicationController
   skip_before_action :require_profile, only: %i[index show]
 
   def new
+    @skills = Skill.all
     @group = Group.new
+    @group.group_skills.build
   end
 
   def create
@@ -18,6 +20,7 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    @skills = Skill.all
     @group = Group.find(params[:id])
   end
 
@@ -55,7 +58,7 @@ class GroupsController < ApplicationController
       :description,
       :limited_number,
       :close_at,
-      group_skills_attributes: %i[id group_id level _destroy]
+      group_skills_attributes: %i[id skill_id level _destroy]
     )
   end
 
