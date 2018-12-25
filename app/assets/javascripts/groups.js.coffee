@@ -7,4 +7,4 @@ $ ->
     min: new Date()
   )
 
-  $('.js-example-basic-multiple').select2()
+  $('.select-multiple').select2()

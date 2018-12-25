@@ -35,6 +35,7 @@ class GroupsController < ApplicationController
 
   def index
     @skills = Skill.all
+    @selected_skill_ids = params[]
     @groups = Group.all
   end
 
