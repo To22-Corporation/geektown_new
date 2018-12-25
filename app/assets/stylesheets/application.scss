@@ -17,4 +17,23 @@
  *= require_self
  */
 
+@import "font-awesome";
 @import "bootstrap";
+
+html {
+  position: relative;
+}
+
+body {
+  margin-bottom: 70px;
+
+  min-height: 100vh;
+}
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+}

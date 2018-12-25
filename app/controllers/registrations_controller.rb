@@ -3,6 +3,7 @@
 class RegistrationsController < ApplicationController
   before_action :check_logged_in
   skip_before_action :require_login, only: %i[new create]
+  skip_before_action :require_profile, only: %i[new create]
 
   def new
     @user = User.new

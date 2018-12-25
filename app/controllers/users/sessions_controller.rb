@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < ApplicationController
-  skip_before_action :require_login, except: [:destroy]
+  skip_before_action :require_login, except: %i[destroy]
+  skip_before_action :require_profile
 
   def new
     @user = User.new
@@ -9,7 +10,7 @@ class Users::SessionsController < ApplicationController
 
   def create
     if (@user = login(params[:email], params[:password]))
-      redirect_back_or_to(user_profile_path(current_user.id), notice: 'ログインしました')
+      redirect_back_or_to(user_profile_path, notice: 'ログインしました')
     else
       flash.now[:alert] = 'ログインに失敗しました'
       render action: 'new'

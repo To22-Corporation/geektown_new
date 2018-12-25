@@ -8,42 +8,51 @@ html
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
   body.text_center.bg-light style="padding-top: 80px;"
-    header
-      nav.navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-dark
-        a.navbar-brand href=root_path
-          | Geektown
-        button.navbar-toggler.collapsed type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"
-          span.navbar-toggler-icon
-        .collapse.navbar-collapse#navbar
-          ul.navbar-nav.ml-auto
-            - if logged_in?
-              li.nav-item
-                = link_to "プロフィール", edit_user_profile_path(current_user.id), class: "nav-link"
-              li.nav-item
-                = link_to "ログアウト", :logout, method: :post, class: "nav-link"
-            - else
+    nav.navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-dark
+      a.navbar-brand href=root_path
+        | Geektown
+      button.navbar-toggler.collapsed type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbar
+        ul.navbar-nav.ml-auto
+          - if logged_in?
+            li.nav-item
+              = link_to "ログアウト", :logout, method: :post, class: "nav-link"
+          - else
+            - unless request.fullpath == '/login'
               li.nav-item
                 = link_to "ログイン", :login, class: "nav-link"
-              - unless request.fullpath == '/registration/new'
-                li.nav-item
-                  = link_to "新規登録", :new_registration, class: "nav-link"
+            - unless request.fullpath == '/registration/new'
+              li.nav-item
+                = link_to "新規登録", :new_registration, class: "nav-link"
 
-    main role="main"
+    main.container role="main"
+      - if flash[:notice]
+        .alert.alert-info.text-center role="alert"
+          p.mt-auto.mb-auto
+            = flash[:notice]
+      - if flash[:alert]
+        .alert.alert-danger.text-center role="alert"
+          p.mt-auto.mb-auto
+            = flash[:alert]
+      = yield
+
+    footer.footer.fixed-bottom.border.border-bottom-0.bg-dark
       .container
-        - if flash[:notice]
-          .alert.alert-info.text-center role="alert"
-            p.mt-auto.mb-auto
-              = flash[:notice]
-        - if flash[:alert]
-          .alert.alert-danger.text-center role="alert"
-            p.mt-auto.mb-auto
-              = flash[:alert]
-        = yield
-
-      footer.container.mt-5
-        p
-          |© 2018-2019 To22, Inc.
-          a href="#"
-            | Privacy
-          a href="#"
-            | Terms
+        .row.text-center
+          .col-3
+            = link_to user_groups_path, class: "text-white"
+              i.fa.fa-users.mr-1
+              = "groups"
+          .col-3.text-white
+            = link_to groups_path, class: "text-white"
+              i.fa.fa-search.mr-1
+              = "search"
+          .col-3.text-white
+            = link_to groups_path, class: "text-white"
+              i.fa.fa-comment.mr-1
+              = "question"
+          .col-3.text-white
+            = link_to user_profile_path, class: "text-white"
+              i.fa.fa-male.mr-1
+              = "profile"

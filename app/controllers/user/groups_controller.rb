@@ -1,4 +1,6 @@
 class User::GroupsController < ApplicationController
+  skip_before_action :require_profile, only: %i[index]
+
   def index
     @groups = current_user.groups
   end
