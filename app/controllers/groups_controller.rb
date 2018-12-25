@@ -35,7 +35,7 @@ class GroupsController < ApplicationController
 
   def index
     @skills = Skill.all
-    @selected_skill_ids = params[]
+    @selected_skill_ids = params["group"]["skill"].map(&:to_i).reject { |i| i <= 0 }
     @groups = Group.all
   end
 

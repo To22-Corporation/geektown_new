@@ -3,7 +3,7 @@ h4 グループ一覧
 .card.bg-white
   .card-body
     form.form-group.form-inline
-      = select :group, :skill, @skills.map{|skill| [skill.name, skill.id]}, { selected: @selected_skills.map(&:id), placeholder: "絞り込むスキルを選択してください"} , class: "form-control col-6 select-multiple", multiple: "multiple"
+      = select :group, :skill, @skills.map{|skill| [skill.name, skill.id]}, { selected: @selected_skill_ids, placeholder: "絞り込むスキルを選択してください"} , class: "form-control col-6 select-multiple", multiple: "multiple"
       span.input-group-addon
         button.btn type="submit"
           span.fa.fa-search
