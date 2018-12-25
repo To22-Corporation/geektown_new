@@ -9,7 +9,7 @@ h4 所属グループ一覧
         - group.users.each do |user|
           .col-3.col-sm-3.col-md-2.col-lg-2.text-center
             a href=user_profile_path(user.id)
-              img.rounded-circle.img-fluid src="http://i.pravatar.cc/120"
+              img.img-thumbnail.img-fluid src=user.profile.image.thumb100.url
       br
       span.badge.badge-info 最新メッセージ
       span.badge.badge-light =group.last_message.first.content if group.last_message.present?

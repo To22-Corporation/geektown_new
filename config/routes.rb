@@ -7,12 +7,14 @@ Rails.application.routes.draw do
   post 'logout' => 'users/sessions#destroy'
 
   resource :registration, only: %i[new create]
-  resources :users, module: :users, only: %i[index] do
-    resource :profile, only: %i[new create edit update show]
-  end
 
   namespace :user do
     resources :groups, only: %i[create index destroy]
+    resource :profile, only: %i[new create show edit update]
+  end
+
+  resources :users, module: :users, only: %i[index] do
+    resource :profile, only: %i[show]
   end
 
   resources :groups, only: %i[new create edit update index show destroy] do
