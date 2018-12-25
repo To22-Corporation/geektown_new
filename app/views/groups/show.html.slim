@@ -6,7 +6,7 @@
       .row.flex-nowrap
         - @group.users.each do |user|
           .col-3.col-sm-3.col-md-2.col-lg-2.text-center
-            a href=user_profile_path(user.id)
+            a href="/users/#{user.id}/profile"
               img.img-thumbnail.img-fluid src=user.profile.image.thumb.url
             p =user.profile.name if user.profile
 
@@ -16,9 +16,15 @@
         ="#{@group.users.count} / #{@group.limited_number}"
 
     - else
-      button.btn.btn-primary type="button" disabled="disabled"
-        | 制限人数&nbsp;
-        span.badge.badge-light ="#{@group.users.count} / #{@group.limited_number}"
+      p
+        span.badge.badge-info.mr-2 制限人数
+        ="#{@group.users.count} / #{@group.limited_number}"
+    .mb-2
+      span.badge.badge-info.mr-2 必要スキル
+      - @group.group_skills.each do |group_skill|
+        button.btn.mr-2 disabled='disabled' class="btn-#{Settings.skill.color_class[group_skill.level-1]}"
+          = group_skill.skill.name
+          span.badge.badge-light.ml-2 =group_skill.level
 
     p
       span.badge.badge-info.mr-2 最新メッセージ
