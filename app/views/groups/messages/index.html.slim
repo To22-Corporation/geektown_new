@@ -24,10 +24,14 @@ h4 =@group.name
             .received_withd_msg
               p =simple_format("#{message.content}")
               span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+  .position-fixed.bg-info#status-area
   .type_msg
     = form_with model: @message, url: group_messages_path, local: true do |form|
       .input_msg_write
         input type="text" name="dummy" style="display:none;"
+        = form.hidden_field :type, style: "display:none;", value: false
         = form.text_area :content, class: 'write_msg', placeholder: "Type a message", rows: "2"
+        button.question_btn type="button"
+          i.fa.fa-question aria-hidden="true"
         button.msg_send_btn type="button" onclick="submit();"
           i.fa.fa-paper-plane-o aria-hidden="true"

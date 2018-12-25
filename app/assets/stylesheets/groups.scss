@@ -139,8 +139,28 @@ img{ max-width:100%;}
   top: 11px;
   width: 33px;
 }
+.question_btn {
+  background: #05728f none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  height: 33px;
+  position: absolute;
+  right: 40px;
+  top: 11px;
+  width: 33px;
+}
 .messaging { padding: 0 0 50px 0;}
 .msg_history {
   height: 516px;
   overflow-y: auto;
+}
+
+#status-area {
+    left: 60% !important;
+    bottom: 20% !important;
+    position: absolute;
+    z-index: 1;
 }
