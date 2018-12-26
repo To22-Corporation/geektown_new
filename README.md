@@ -49,7 +49,7 @@ rails db:create
 # マイグレーション実行
 rails db:migrate
 # シード実行
-rails db:seed
+rails db:seed_fu
 
 exit
 ```
