@@ -13,8 +13,8 @@ Windowsの人は[Docker for Windows](https://www.docker.com/products/docker-desk
 ### 2. リポジトリをクローンする
 
 ```
-$ git clone https://github.com/To22-Corporation/geektown.git
-$ cd line-management
+$ git clone https://github.com/To22-Corporation/geektown_new.git
+$ cd geektown_new
 ```
 
 ### 3. envファイルの用意
