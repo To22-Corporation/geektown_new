@@ -17,7 +17,6 @@
 #= require activestorage
 #= require pickadate/picker
 #= require pickadate/picker.date
-#= require pickadate/translations/ja_JP
 #= require select2
 #= require_self
 #= require_tree .
