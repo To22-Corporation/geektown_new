@@ -19,4 +19,28 @@
 #= require pickadate/picker.date
 #= require pickadate/translations/ja_JP
 #= require select2
+#= require_self
 #= require_tree .
+
+(($) ->
+  $.fn.flash_message = (options) ->
+    options = $.extend({
+      text: 'Done'
+      time: 750
+      how: 'before'
+      class_name: ''
+    }, options)
+    $(this).each ->
+      message = undefined
+      if $(this).parent().find('.flash_message').get(0)
+        return
+      message = $('<span />',
+        'class': 'flash_message ' + options.class_name
+        text: options.text).hide().fadeIn('fast')
+      $(this)[options.how] message
+      message.delay(options.time).fadeOut 'normal', ->
+        $(this).remove()
+        return
+      return
+  return
+) jQuery

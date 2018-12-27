@@ -1,4 +1,4 @@
-h1 チャットルーム
+h4 =@group.name
 
 - if @message.errors.any?
   #error_explanation
@@ -12,20 +12,42 @@ h1 チャットルーム
     - @messages.each do |message|
       - if message.user == current_user
         .outgoing_msg
-          .sent_msg
-            p =message.content
-            span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+          - if message.type == 'Chat'
+            .sent_msg_chat
+              p =simple_format("#{message.content}")
+              span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+          - else
+            .sent_msg_question
+              p =simple_format("#{message.content}")
+              p.border-top
+                a.text-white.fa.fa-plus href="/questions/#{message.id}" コメントする
+                a.text-white.float-right href="/questions/#{message.id}" ="#{message.answers.count}件の返信"
+              span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
       - else
         .incoming_msg.mb-4
           .incoming_msg_img
-            img alt="sunil" src=message.user.profile.image.thumb50 /
+            = link_to "/users/#{message.user.id}/profile"
+              img alt="image" src=message.user.profile.image.thumb30 /
           .received_msg
-            .received_withd_msg
-              p =message.content
-              span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+            - if message.type == 'Chat'
+              .received_withd_msg
+                p =simple_format("#{message.content}")
+                span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+            - else
+              .received_withd_msg_question
+                p =simple_format("#{message.content}")
+                p.border-top
+                  a.text-white.fa.fa-plus href="/questions/#{message.id}" コメントする
+                  a.text-white.float-right href="/questions/#{message.id}" ="#{message.answers.count}件の返信"
+                span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
+  .position-fixed.bg-info#status-area
   .type_msg
     = form_with model: @message, url: group_messages_path, local: true do |form|
       .input_msg_write
-        = form.text_field :content, class: 'write_msg', placeholder: "Type a message"
-        button.msg_send_btn type="submit"
+        input type="text" name="dummy" style="display:none;"
+        = form.hidden_field :type, style: "display:none;", value: "Chat"
+        = form.text_area :content, class: 'write_msg', placeholder: "Type a message", rows: "2"
+        button.question_btn type="button"
+          i.fa.fa-question aria-hidden="true"
+        button.msg_send_btn type="button" onclick="submit();"
           i.fa.fa-paper-plane-o aria-hidden="true"

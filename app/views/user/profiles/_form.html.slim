@@ -1,4 +1,6 @@
+= render 'shared/error', model: @profile
 = form_with model: @profile, url: user_profile_path, local: true do |f|
+
   .image.text-center
     - if @profile.image?
       = image_tag @profile.image.thumb.url, class: "img-thumbnail"
@@ -27,4 +29,4 @@
     = link_to_add_fields "スキル追加", f, :profile_skills, 'btn-default btn'
 
   .actions.mt-4
-    = f.submit "Save", class: "btn btn-lg btn-primary btn-block"
+    = f.submit "保存する", class: "btn btn-lg btn-primary btn-block"

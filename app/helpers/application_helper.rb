@@ -10,7 +10,9 @@ module ApplicationHelper
 
   def check_skill_level(group, user)
     group_skills = group.group_skills
-    profile_skills = user.profile.profile_skills
+    profile_skills = user.profile ? user.profile.profile_skills : []
+    return false if profile_skills.blank?
+
     group_skills.each do |group_skill|
       profile_skill = profile_skills.find_by(skill_id: group_skill.skill_id)
       return false unless profile_skill && profile_skill.level >= group_skill.level

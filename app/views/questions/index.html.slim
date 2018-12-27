@@ -1,0 +1,34 @@
+form.form-group.form-inline
+  = select :question, :skill, @skills.map{|skill| [skill.name, skill.id]}, { selected: @selected_skill_ids, placeholder: "絞り込むスキルを選択してください"} , class: "form-control col-6 select-multiple", multiple: "multiple"
+  span.input-group-addon
+    button.btn.btn-default type="submit"
+      span.fa.fa-search
+
+h4 質問一覧
+
+- @questions.each do |question|
+  .card.mt-4
+    - if question.group
+      .card-header.bg-white
+        h4.mt-2
+         .text-secondary
+            | グループ:&nbsp
+            = link_to question.group.name, group_path(question.group.id), class: 'text-secondary'
+            |
+        - if question.group.skills.present?
+          .mb-2
+            - question.group.group_skills.each do |group_skill|
+              button.btn.mr-2 disabled='disabled' class="btn-#{Settings.skill.color_class[group_skill.level-1]}"
+                = group_skill.skill.name
+                span.badge.badge-light.ml-2 =group_skill.level
+    .card-body
+      .card-text
+        a.image.float-left.user-l.mb-2 style="padding-right: 10px; width: 20%;" href="users/#{question.user.id}/profile"
+          img.img-thumbnail src=question.user.profile.image.thumb.url
+        .align-middle.my-auto.py-auto
+          = link_to question.user.profile.name, "users/#{question.user.id}/profile", class: "text-dark"
+          br
+          small.text-muted ="#{question.created_at.strftime("%m月%d日 %H時%M分")}"
+    .card-body
+      p.text-dark =simple_format("#{question.content}")
+    = link_to "コメント数: #{question.answers.count}件", question_path(question.id), class: 'card-footer btn text-muted text-left'

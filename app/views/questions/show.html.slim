@@ -1,0 +1,67 @@
+.card.mt-4
+  .card-header.bg-white
+    h4.mt-2
+     .text-secondary
+        | グループ:&nbsp
+        = link_to @question.group.name, group_path(@question.group.id), class: 'text-secondary'
+        |
+    - if @question.group.skills.present?
+      .mb-2
+        - @question.group.group_skills.each do |group_skill|
+          button.btn.mr-2 disabled='disabled' class="btn-#{Settings.skill.color_class[group_skill.level-1]}"
+            = group_skill.skill.name
+            span.badge.badge-light.ml-2 =group_skill.level
+  .card-body
+    .card-text
+      a.image.float-left.user-l.mb-2 style="padding-right: 10px; width: 20%;" href="/users/#{@question.user.id}/profile"
+        img.img-thumbnail src=@question.user.profile.image.thumb.url
+      .align-middle.my-auto.py-auto
+        = link_to @question.user.profile.name, "users/#{@question.user.id}/profile", class: "text-dark"
+        br
+        small.text-muted ="#{@question.created_at.strftime("%m月%d日 %H時%M分")}"
+  .card-body
+    p.text-dark =simple_format("#{@question.content}")
+  .card-footer.text-muted.text-left ="コメント数: #{@question.answers.count}件"
+
+.container
+  - @question.answers.each do |answer|
+    .row.mt-4
+      - if answer.user == @question.user
+        a.col-2.image.float-left.user-l style="width: 20%;" href="/users/#{answer.user.id}/profile"
+          img.img-thumbnail src=answer.user.profile.image.thumb.url
+        .card.col-10
+          .row.mt-2
+            .col-12
+              p.text-secondary = answer.user.profile.name
+          .row
+            .col-12
+              p.text-dark =simple_format("#{answer.content}")
+          small.text-muted.text-right.pb-1 ="#{answer.created_at.strftime("%m月%d日 %H時%M分")}"
+      - else
+        .card.col-10
+          .row.mt-2
+            .col-12
+              p.text-secondary = answer.user.profile.name
+          .row
+            .col-12
+              p.text-dark =simple_format("#{answer.content}")
+          small.text-muted.text-right.pb-1 ="#{answer.created_at.strftime("%m月%d日 %H時%M分")}"
+        a.col-2.image.float-left.user-l style="width: 20%;" href="/users/#{answer.user.id}/profile"
+          img.img-thumbnail src=answer.user.profile.image.thumb.url
+
+- if current_user.participated_in?(@question.group.id)
+  .mt-4
+    = form_with model: @answer, url: question_answers_path(@question), local: true do |form|
+      = form.hidden_field :type, style: "display:none;", value: "Answer"
+      input type="text" name="dummy" style="display:none;"
+      .input-group.form-inline.mb-0
+        = form.text_area :content, class: 'form-control', placeholder: "type a message", rows: "2", "aria-label": "送信"
+        .input-group-append
+          button.fa.fa-send.input-group-text.btn.btn-primary 送信
+- else
+  .mt-4
+    = form_with model: @answer, url: question_answers_path(@question), local: true do |form|
+      .input-group.form-inline.mb-0
+        = form.text_area :content, class: 'form-control', placeholder: "グループに参加すると質問に回答することができます", rows: "2", "aria-label": "送信", disabled: "disabled"
+        .input-group-append
+          button.fa.fa-send.input-group-text.btn.btn-primary disabled="disabled" 送信

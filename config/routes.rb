@@ -22,4 +22,10 @@ Rails.application.routes.draw do
       resources :messages, only: %i[index create]
     end
   end
+
+  resources :questions, only: %i[index show] do
+    scope module: :questions do
+      resources :answers, only: %i[create]
+    end
+  end
 end
