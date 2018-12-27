@@ -11,5 +11,5 @@ h4 所属グループ一覧
             a href=user_profile_path(user.id)
               img.img-thumbnail.img-fluid src=user.profile.image.thumb100.url
       br
-      span.badge.badge-info 最新メッセージ
-      span.badge.badge-light =group.last_message.first.content if group.last_message.present?
+      span.badge.badge-info.mr-2 最新メッセージ
+      = group.last_message.first.content if group.last_message.present?
