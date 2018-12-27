@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   def index
+    @skills = Skill.all
     @questions = Question.all
   end
 
