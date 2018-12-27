@@ -17,7 +17,8 @@
         img.img-thumbnail src=@question.user.profile.image.thumb.url
       .align-middle.my-auto.py-auto
         = link_to @question.user.profile.name, "users/#{@question.user.id}/profile", class: "text-dark"
-        p.text-muted ="#{((Time.now - @question.created_at)/3600).round} 時間前"
+        br
+        small.text-muted ="#{@question.created_at.strftime("%m月%d日 %H時%M分")}"
   .card-body
     = @question.content
   .card-footer.text-muted.text-left ="コメント数: #{@question.answers.count}件"
@@ -34,7 +35,8 @@
               p.text-secondary = answer.user.profile.name
           .row
             .col-12
-              p.text-dark = answer.content
+              p.text-dark =simple_format("#{answer.content}")
+          small.text-muted.text-right.pb-1 ="#{answer.created_at.strftime("%m月%d日 %H時%M分")}"
       - else
         .card.col-10
           .row.mt-2
@@ -42,6 +44,7 @@
               p.text-secondary = answer.user.profile.name
           .row
             .col-12
-              p.text-dark = answer.content
+              p.text-dark =simple_format("#{answer.content}")
+          small.text-muted.text-right.pb-1 ="#{answer.created_at.strftime("%m月%d日 %H時%M分")}"
         a.col-2.image.float-left.user-l style="width: 20%;" href="/users/#{answer.user.id}/profile"
           img.img-thumbnail src=answer.user.profile.image.thumb.url
