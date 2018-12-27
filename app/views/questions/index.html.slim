@@ -29,4 +29,4 @@ h4 質問一覧
           p.text-muted ="#{((Time.now - question.created_at)/3600).round} 時間前"
     .card-body
       = question.content
-    = link_to "コメント数: 5件", question_path(question.id), class: 'card-footer btn text-muted text-left'
+    = link_to "コメント数: #{question.answers.count}件", question_path(question.id), class: 'card-footer btn text-muted text-left'

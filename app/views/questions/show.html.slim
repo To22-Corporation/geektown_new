@@ -1,0 +1,23 @@
+.card.mt-4
+  .card-header.bg-white
+    h4.mt-2
+     .text-secondary
+        | グループ:&nbsp
+        = link_to @question.group.name, group_path(@question.group.id), class: 'text-secondary'
+        |
+    - if @question.group.skills.present?
+      .mb-2
+        - @question.group.group_skills.each do |group_skill|
+          button.btn.mr-2 disabled='disabled' class="btn-#{Settings.skill.color_class[group_skill.level-1]}"
+            = group_skill.skill.name
+            span.badge.badge-light.ml-2 =group_skill.level
+  .card-body
+    .card-text
+      a.image.float-left.user-l.mb-2 style="padding-right: 10px; width: 20%;" href="users/#{@question.user.id}/profile"
+        img.img-thumbnail src=@question.user.profile.image.thumb.url
+      .align-middle.my-auto.py-auto
+        = link_to @question.user.profile.name, "users/#{@question.user.id}/profile", class: "text-dark"
+        p.text-muted ="#{((Time.now - @question.created_at)/3600).round} 時間前"
+  .card-body
+    = @question.content
+  .card-footer.text-muted.text-left ="コメント数: #{@question.answers.count}件"
