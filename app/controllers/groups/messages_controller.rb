@@ -33,7 +33,7 @@ class Groups::MessagesController < ApplicationController
 
   def set_master
     @group = Group.find(params[:group_id])
-    @messages = @group.messages
+    @messages = @group.messages.where.not(type: 'Answer')
     @users = @group.users
   end
 end

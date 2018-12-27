@@ -19,6 +19,9 @@ h4 =@group.name
           - else
             .sent_msg_question
               p =simple_format("#{message.content}")
+              p.border-top
+                a.text-white.fa.fa-plus href="/questions/#{message.id}" コメントする
+                a.text-white.float-right href="/questions/#{message.id}" ="#{message.answers.count}件の返信"
               span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
       - else
         .incoming_msg.mb-4
@@ -33,6 +36,9 @@ h4 =@group.name
             - else
               .received_withd_msg_question
                 p =simple_format("#{message.content}")
+                p.border-top
+                  a.text-white.fa.fa-plus href="/questions/#{message.id}" コメントする
+                  a.text-white.float-right href="/questions/#{message.id}" ="#{message.answers.count}件の返信"
                 span.time_date ="#{message.created_at.strftime("%H:%M:%S  %p    |    %m月%d日")}"
   .position-fixed.bg-info#status-area
   .type_msg
