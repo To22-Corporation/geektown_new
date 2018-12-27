@@ -23,5 +23,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :questions, only: %i[index show]
+  resources :questions, only: %i[index show] do
+    scope module: :questions do
+      resources :answers, only: %i[create]
+    end
+  end
 end

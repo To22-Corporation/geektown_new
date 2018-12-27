@@ -17,4 +17,8 @@ class User < ApplicationRecord
                        presence: true,
                        length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
+  def participated_in?(group_id)
+    group_ids.include?(group_id)
+  end
 end

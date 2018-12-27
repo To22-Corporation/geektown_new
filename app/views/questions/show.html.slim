@@ -20,7 +20,7 @@
         br
         small.text-muted ="#{@question.created_at.strftime("%m月%d日 %H時%M分")}"
   .card-body
-    = @question.content
+    p.text-dark =simple_format("#{@question.content}")
   .card-footer.text-muted.text-left ="コメント数: #{@question.answers.count}件"
 
 .container
@@ -48,3 +48,20 @@
           small.text-muted.text-right.pb-1 ="#{answer.created_at.strftime("%m月%d日 %H時%M分")}"
         a.col-2.image.float-left.user-l style="width: 20%;" href="/users/#{answer.user.id}/profile"
           img.img-thumbnail src=answer.user.profile.image.thumb.url
+
+- if current_user.participated_in?(@question.group.id)
+  .mt-4
+    = form_with model: @answer, url: question_answers_path(@question), local: true do |form|
+      = form.hidden_field :type, style: "display:none;", value: "answer"
+      input type="text" name="dummy" style="display:none;"
+      .input-group.form-inline.mb-0
+        = form.text_area :content, class: 'form-control', placeholder: "type a message", rows: "2", "aria-label": "送信"
+        .input-group-append
+          button.fa.fa-send.input-group-text.btn.btn-primary 送信
+- else
+  .mt-4
+    = form_with model: @answer, url: question_answers_path(@question), local: true do |form|
+      .input-group.form-inline.mb-0
+        = form.text_area :content, class: 'form-control', placeholder: "グループに参加すると質問に回答することができます", rows: "2", "aria-label": "送信", disabled: "disabled"
+        .input-group-append
+          button.fa.fa-send.input-group-text.btn.btn-primary disabled="disabled" 送信

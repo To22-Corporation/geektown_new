@@ -26,7 +26,8 @@ h4 質問一覧
           img.img-thumbnail src=question.user.profile.image.thumb.url
         .align-middle.my-auto.py-auto
           = link_to question.user.profile.name, "users/#{question.user.id}/profile", class: "text-dark"
-          p.text-muted ="#{((Time.now - question.created_at)/3600).round} 時間前"
+          br
+          small.text-muted ="#{question.created_at.strftime("%m月%d日 %H時%M分")}"
     .card-body
-      = question.content
+      p.text-dark =simple_format("#{question.content}")
     = link_to "コメント数: #{question.answers.count}件", question_path(question.id), class: 'card-footer btn text-muted text-left'
