@@ -1,5 +1,5 @@
 form.form-group.form-inline
-  = select :group, :skill, @skills.map{|skill| [skill.name, skill.id]}, { selected: @selected_skill_ids, placeholder: "絞り込むスキルを選択してください"} , class: "form-control col-6 select-multiple", multiple: "multiple"
+  = select :question, :skill, @skills.map{|skill| [skill.name, skill.id]}, { selected: @selected_skill_ids, placeholder: "絞り込むスキルを選択してください"} , class: "form-control col-6 select-multiple", multiple: "multiple"
   span.input-group-addon
     button.btn.btn-default type="submit"
       span.fa.fa-search

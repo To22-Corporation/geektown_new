@@ -3,7 +3,9 @@ class QuestionsController < ApplicationController
 
   def index
     @skills = Skill.all
-    @questions = Question.all
+    @selected_skill_ids = params.has_key?("question") ? params["question"]["skill"] : []
+    @selected_skill_ids.map!(&:to_i).reject! { |i| i <= 0 }
+    @questions = Question.includes(group: :skills).where(skills: { id: @selected_skill_ids.presence || @selected_skill_ids.present? ? @selected_skill_ids : @skills.map(&:id) })
   end
 
   def show
