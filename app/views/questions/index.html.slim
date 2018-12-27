@@ -12,7 +12,7 @@ h4 質問一覧
       h4.mt-2
        .text-secondary
           | グループ:&nbsp
-          = link_to question.content, question_path(question.id), class: 'text-secondary'
+          = link_to question.group.name, group_path(question.group.id), class: 'text-secondary'
           |
       - if question.group.skills.present?
         .mb-2
@@ -21,10 +21,12 @@ h4 質問一覧
               = group_skill.skill.name
               span.badge.badge-light.ml-2 =group_skill.level
     .card-body
-      a.image.float-left.user-l.mb-2 style="padding-right: 10px; width: 20%;" href="users/#{question.user.id}/profile"
-        img.img-thumbnail src=question.user.profile.image.thumb.url
-      .align-middle.my-auto.py-auto
-        = link_to question.user.profile.name, "users/#{question.user.id}/profile", class: "text-dark"
-        p.text-muted ="#{((Time.now - question.created_at)/3600).round} 時間前"
+      .card-text
+        a.image.float-left.user-l.mb-2 style="padding-right: 10px; width: 20%;" href="users/#{question.user.id}/profile"
+          img.img-thumbnail src=question.user.profile.image.thumb.url
+        .align-middle.my-auto.py-auto
+          = link_to question.user.profile.name, "users/#{question.user.id}/profile", class: "text-dark"
+          p.text-muted ="#{((Time.now - question.created_at)/3600).round} 時間前"
     .card-body
       = question.content
+    = link_to "コメント数: 5件", question_path(question.id), class: 'card-footer btn text-muted text-left'
