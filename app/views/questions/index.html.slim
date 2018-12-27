@@ -1,0 +1,22 @@
+form.form-group.form-inline
+  = select :group, :skill, @skills.map{|skill| [skill.name, skill.id]}, { selected: @selected_skill_ids, placeholder: "絞り込むスキルを選択してください"} , class: "form-control col-6 select-multiple", multiple: "multiple"
+  span.input-group-addon
+    button.btn.btn-default type="submit"
+      span.fa.fa-search
+
+h4 質問一覧
+
+- @questions.each do |question|
+  .card.mt-4
+    .card-header.text-white.bg-primary
+      h4
+        = link_to question.content, question_path(question.id), class: 'text-white'
+    .card-body.container.testimonial-group
+      br
+      - if question.group.skills.present?
+        .mb-2
+          span.badge.badge-info.mr-2 必要スキル
+          - question.group.group_skills.each do |group_skill|
+            button.btn.mr-2 disabled='disabled' class="btn-#{Settings.skill.color_class[group_skill.level-1]}"
+              = group_skill.skill.name
+              span.badge.badge-light.ml-2 =group_skill.level
