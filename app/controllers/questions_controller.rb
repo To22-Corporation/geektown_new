@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  skip_before_action :require_profile, only: %i[index show]
+
   def index
     @skills = Skill.all
     @questions = Question.all
