@@ -4,7 +4,7 @@ class CreateGroups < ActiveRecord::Migration[5.2]
       t.string :name, null: false, limit: 128
       t.text :description, null: false
       t.datetime :close_at, null: false
-      t.unsigned_integer :limited_number, null: false, limit: 2
+      t.integer :limited_number, null: false, limit: 2, unsigned: true
 
       t.timestamps
     end
