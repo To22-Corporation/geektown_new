@@ -7,7 +7,8 @@ html
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
-  body.text_center.bg-light style="padding-top: 80px;"
+    meta name="viewport" content="width=device-width,initial-scale=1"
+  body.bg-light style="padding-top: 80px;"
     nav.navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-dark
       a.navbar-brand href=root_path
         | Geektown
@@ -26,7 +27,7 @@ html
               li.nav-item
                 = link_to "新規登録", :new_registration, class: "nav-link"
 
-    main.container role="main"
+    .container role="main"
       - if flash[:notice]
         .alert.alert-info.text-center role="alert"
           p.mt-auto.mb-auto
