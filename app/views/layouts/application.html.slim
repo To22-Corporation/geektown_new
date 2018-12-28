@@ -39,7 +39,7 @@ html
       = yield
 
     footer.footer.fixed-bottom.border.border-bottom-0.bg-dark
-      .container
+      .container.d-none.d-sm-block
         .row.text-center
           .col-3
             = link_to user_groups_path, class: "text-white"
@@ -57,3 +57,17 @@ html
             = link_to user_profile_path, class: "text-white"
               i.fa.fa-male.mr-1
               = "プロフィール"
+      .container.d-sm-none
+        .row.text-center.hidden-sm-up
+          .col-3
+            = link_to user_groups_path, class: "text-white"
+              i.fa.fa-users.mr-1
+          .col-3.text-white
+            = link_to groups_path, class: "text-white"
+              i.fa.fa-search.mr-1
+          .col-3.text-white
+            = link_to questions_path, class: "text-white"
+              i.fa.fa-comment.mr-1
+          .col-3.text-white
+            = link_to user_profile_path, class: "text-white"
+              i.fa.fa-male.mr-1
