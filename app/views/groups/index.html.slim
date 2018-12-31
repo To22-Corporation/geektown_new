@@ -53,7 +53,7 @@ h4 グループ一覧
         - else
           = link_to "グループから抜ける", user_group_path(group.id), class: "btn btn-danger mt-2", method: :delete
 
-      - elsif group.users.count < group.limited_number
+      - elsif group.limited_number.nil? || group.users.count < group.limited_number
         = form_with url: user_groups_path, local: true do |form|
           = form.hidden_field "group[id]", value: group.id
           = form.submit "グループに参加する", class: "btn btn-success mt-4"
