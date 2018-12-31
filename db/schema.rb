@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_27_145519) do
+ActiveRecord::Schema.define(version: 2018_12_31_090804) do
 
   create_table "answer_questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "answer_id", null: false
@@ -78,13 +78,11 @@ ActiveRecord::Schema.define(version: 2018_12_27_145519) do
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "user_id", null: false
-    t.bigint "university_id", null: false
-    t.bigint "faculty_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
-    t.index ["faculty_id"], name: "index_profiles_on_faculty_id"
-    t.index ["university_id"], name: "index_profiles_on_university_id"
+    t.string "university", null: false
+    t.string "faculty", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -107,7 +105,5 @@ ActiveRecord::Schema.define(version: 2018_12_27_145519) do
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token"
   end
 
-  add_foreign_key "profiles", "faculties"
-  add_foreign_key "profiles", "universities"
   add_foreign_key "profiles", "users"
 end
