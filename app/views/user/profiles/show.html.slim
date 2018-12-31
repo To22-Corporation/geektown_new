@@ -5,7 +5,7 @@
       img.img-thumbnail src=@user.profile.image.thumb.url
     .align-middle.mt-4
       h5.card-title ="#{@user.profile.university}・#{@user.profile.faculty}"
-      - @user.profile.profile_skills.each do |profile_skill|
+      / - @user.profile.profile_skills.each do |profile_skill|
         button.btn.mr-2 disabled='disabled' class="btn-#{Settings.skill.color_class[profile_skill.level-1]}"
           = profile_skill.skill.name
           span.badge.badge-light.ml-2 =profile_skill.level
