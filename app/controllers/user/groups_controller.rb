@@ -8,7 +8,7 @@ class User::GroupsController < ApplicationController
   def create
     @group = Group.find(params[:group][:id])
 
-    if @group.users.count < @group.limited_number && current_user.groups << @group
+    if (@group.limited_number.nil? || @group.users.count < @group.limited_number) && current_user.groups << @group
       redirect_to(group_messages_path(@group.id), notice: 'グループに参加しました')
     else
       redirect_to(user_groups_path, notice: 'グループに参加できませんでした')

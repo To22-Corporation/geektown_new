@@ -5,7 +5,7 @@ class Users::ProfilesController < ApplicationController
 
   def show
     set_master
-    @user = User.includes(profile: [:university, :faculty, profile_skills: :skill]).find(request.params["user_id"])
+    @user = User.includes(profile: [profile_skills: :skill]).find(request.params["user_id"])
   end
 
   def set_master

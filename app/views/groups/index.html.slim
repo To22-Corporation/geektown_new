@@ -8,26 +8,56 @@ h4 グループ一覧
 
 - @groups.each do |group|
   .card.mt-4
-    .card-header.text-white.bg-primary
-      h4
-        = link_to group.name, group_path(group.id), class: 'text-white'
-    .card-body.container.testimonial-group
-      - if group.users.present?
-        .row.flex-nowrap.pb-3
+    h4.card-header.bg-primary.text-white =group.name
+    .card-body
+      .align-middle
+        h5.card-title ="#{group.description}"
+        .row.flex-nowrap
           - group.users.each do |user|
             .col-3.col-sm-3.col-md-2.col-lg-2.text-center
-              a href=user_profile_path(user.id)
-                img.img-thumbnail.img-fluid src=user.profile.image.thumb100.url
-      br
-      - if group.group_skills.present?
-        .mb-2
-          span.badge.badge-info.mr-2 必要スキル
-          - group.group_skills.each do |group_skill|
-            button.btn.mr-2 disabled='disabled' class="btn-#{Settings.skill.color_class[group_skill.level-1]}"
-              = group_skill.skill.name
-              span.badge.badge-light.ml-2 =group_skill.level
+              a href="/users/#{user.id}/profile"
+                img.img-thumbnail.img-fluid src=(user.profile.present? ? user.profile.image.thumb.url : nil)
+              p =user.profile.name if user.profile
+
+      - if group.limited_number.nil?
+        p
+          span.badge.badge-info.mr-2 制限人数
+          ="なし"
+
+      - elsif group.users.count == group.limited_number
+        p
+          span.badge.badge-danger.mr-2 制限人数
+          ="#{group.users.count} / #{group.limited_number}"
+
+      - else
+        p
+          span.badge.badge-info.mr-2 制限人数
+          ="#{group.users.count} / #{group.limited_number}"
+      .mb-2
+        span.badge.badge-info.mr-2 必要スキル
+        - group.group_skills.each do |group_skill|
+          button.btn.mr-2 disabled='disabled' class="btn-#{Settings.skill.color_class[group_skill.level-1]}"
+            = group_skill.skill.name
+            span.badge.badge-light.ml-2 =group_skill.level
+
       p
         span.badge.badge-info.mr-2 最新メッセージ
-        = group.last_message.first.content if group.last_message.present?
+        =group.last_message.first.content if group.last_message.present?
+
+      - if group.user_ids.include?(current_user.id)
+        = link_to "チャットルーム", group_messages_path(group.id), class: "btn btn-success mt-2"
+        br
+        - if group.owner == current_user
+          = link_to "グループを編集する", edit_group_path(group.id), class: "btn btn-info mr-2 mt-4"
+          = link_to "グループを削除する", group_path(group.id), class: "btn btn-danger mt-4", method: :delete, data: { confirm: "本当にグループを削除しますか？" }
+        - elsif !group.is_master
+          = link_to "グループから抜ける", user_group_path(group.id), class: "btn btn-danger mt-2", method: :delete
+
+      - elsif group.limited_number.nil? || group.users.count < group.limited_number
+        = form_with url: user_groups_path, local: true do |form|
+          = form.hidden_field "group[id]", value: group.id
+          = form.submit "グループに参加する", class: "btn btn-success mt-4"
+      - else
+        button.btn.btn-danger disabled="disabled" cannot join for limit
 
 = link_to "グループを作成する", new_group_path, class: "btn btn-primary text-white mt-2"

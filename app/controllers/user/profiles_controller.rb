@@ -22,7 +22,7 @@ class User::ProfilesController < ApplicationController
 
   def show
     set_master
-    @user = User.includes(profile: [:university, :faculty, profile_skills: :skill]).find(current_user.id)
+    @user = User.includes(profile: [profile_skills: :skill]).find(current_user.id)
   end
 
   def edit
@@ -46,8 +46,12 @@ class User::ProfilesController < ApplicationController
     params.require(:profile).permit(
       :image,
       :name,
-      :university_id,
-      :faculty_id,
+      :grade,
+      :comment,
+      # :university_id,
+      # :faculty_id,
+      :university,
+      :faculty,
       profile_skills_attributes: %i[id skill_id level _destroy]
     )
   end

@@ -12,6 +12,7 @@ class RegistrationsController < ApplicationController
   def create
     @user = Users::RegistrationService.register(user_params)
     if login(@user.email, user_params[:password])
+      @user.groups << Group.find_by(is_master: true)
       redirect_back_or_to(new_user_profile_path(current_user.id), notice: '新規登録完了しました')
     else
       render action: 'new'

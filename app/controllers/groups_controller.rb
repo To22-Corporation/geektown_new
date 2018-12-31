@@ -12,18 +12,6 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
 
-    # level check
-    level_flag = true
-    group_skills = @group.group_skills
-    profile_skills = current_user.profile.profile_skills
-    group_skills.each do |group_skill|
-      profile_skill = profile_skills.find_by(skill_id: group_skill.skill_id)
-      unless profile_skill && profile_skill.level >= group_skill.level
-        level_flag = false
-        break
-      end
-    end
-
     if @group.save
       @group.build_ownership(user_id: current_user.id).save
       redirect_to("/groups/#{@group.id}/messages", notice: 'グループを作成しました')
@@ -51,7 +39,11 @@ class GroupsController < ApplicationController
     set_master
     @selected_skill_ids = params.has_key?("group") ? params["group"]["skill"] : []
     @selected_skill_ids.map!(&:to_i).reject! { |i| i <= 0 }
-    @groups = Group.includes(:skills).where(skills: { id: @selected_skill_ids.presence || @selected_skill_ids.present? ? @selected_skill_ids : @skills.map(&:id) })
+    if @selected_skill_ids.present?
+      @groups = Group.includes(:skills).where(skills: { id: @selected_skill_ids })
+    else
+      @groups = Group.includes(:skills).all
+    end
   end
 
   def show

@@ -42,10 +42,6 @@
     - elsif @group.users.count < @group.limited_number
       = form_with url: user_groups_path, local: true do |form|
         = form.hidden_field "group[id]", value: @group.id
-        - if check_skill_level(@group, current_user)
-          = form.submit "グループに参加する", class: "btn btn-success mt-4"
-        - else
-          = form.submit "グループに参加する", class: "btn btn-success mt-4", disabled: "disabled"
-          p.form-text.text-danger ※スキルレベルが足りません
+        = form.submit "グループに参加する", class: "btn btn-success mt-4"
     - else
       button.btn.btn-danger disabled="disabled" cannot join for limit
