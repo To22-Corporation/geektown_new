@@ -35,10 +35,11 @@ ActiveRecord::Schema.define(version: 2018_12_31_094524) do
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 128, null: false
     t.text "description", null: false
-    t.datetime "close_at", null: false
+    t.datetime "close_at"
     t.integer "limited_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_master", default: false
   end
 
   create_table "message_participations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

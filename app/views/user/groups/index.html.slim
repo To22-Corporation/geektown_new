@@ -10,7 +10,7 @@ h4 所属グループ一覧
           - group.users.each do |user|
             .col-3.col-sm-3.col-md-2.col-lg-2.text-center
               a href="/users/#{user.id}/profile"
-                img.img-thumbnail.img-fluid src=user.profile.image.thumb.url
+                img.img-thumbnail.img-fluid src=(user.profile.present? ? user.profile.image.thumb.url : nil)
               p =user.profile.name if user.profile
 
       - if group.limited_number.nil?
