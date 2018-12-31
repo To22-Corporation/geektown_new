@@ -7,7 +7,7 @@ class Participation < ApplicationRecord
 
   validates :user, presence: true
   validates :group, presence: true
-  validate :check_level
+  # validate :check_level
 
   def check_level
     group_skills = group.group_skills

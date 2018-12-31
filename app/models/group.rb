@@ -16,7 +16,11 @@ class Group < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
   validates :close_at, presence: true
-  validates :limited_number, presence: true, numericality: { only_integer: true }
+  validate :check_limit_number
+
+  def check_limit_number
+    errors.add(:skill, 'スキルレベルは1以上5以下で選択してください') if !limited_number.nil? && limited_number < 1
+  end
 
   attribute :close_at, :formatted_date, default: nil
 end

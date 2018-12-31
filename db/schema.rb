@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_31_090804) do
+ActiveRecord::Schema.define(version: 2018_12_31_094524) do
 
   create_table "answer_questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "answer_id", null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2018_12_31_090804) do
     t.string "name", limit: 128, null: false
     t.text "description", null: false
     t.datetime "close_at", null: false
-    t.integer "limited_number", limit: 2, null: false, unsigned: true
+    t.integer "limited_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(version: 2018_12_31_090804) do
     t.string "image"
     t.string "university", null: false
     t.string "faculty", null: false
+    t.string "comment", null: false
+    t.integer "grade", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

@@ -4,5 +4,7 @@ class ChageProfiles < ActiveRecord::Migration[5.2]
     remove_reference :profiles, :faculty, foreign_key: true
     add_column :profiles, :university, :string, null: false
     add_column :profiles, :faculty, :string, null: false
+    add_column :profiles, :comment, :string, null: false
+    add_column :profiles, :grade, :integer, null: false
   end
 end

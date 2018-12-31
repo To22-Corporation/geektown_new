@@ -21,14 +21,22 @@
     .col-10
       // = f.select :faculty_id, @faculties.map{|f| [f.name, f.id]}, { prompt: "学部を選択してください" }, class: "form-control", required: true
       = f.text_field :faculty, class: "form-control", placeholder: "学部を入力してください", required: true
+  .form-group.row
+    = f.label :grade, "学年", class: 'col-form-label col-2'
+    .col-10
+      = f.number_field :grade, class: "form-control", placeholder: "学年を入力してください", required: true
+  .form-group.row
+    = f.label :comment, "コメント", class: 'col-form-label col-2'
+    .col-10
+      = f.text_area :comment, class: "form-control", placeholder: "コメントを入力してください", required: true, rows: 4
   br
 
-  .card.mb-4
-    = f.label :profile_skills, 'スキル', class: 'card-header'
-    = f.fields_for :profile_skills do |p|
-      ul.list-group.list-group-flush
-        = render "profile_skill_fields", f: p
-    = link_to_add_fields "スキル追加", f, :profile_skills, 'btn-default btn'
+  // .card.mb-4
+     = f.label :profile_skills, 'スキル', class: 'card-header'
+     = f.fields_for :profile_skills do |p|
+       ul.list-group.list-group-flush
+         = render "profile_skill_fields", f: p
+     = link_to_add_fields "スキル追加", f, :profile_skills, 'btn-default btn'
 
   .actions.mt-4
     = f.submit "保存する", class: "btn btn-lg btn-primary btn-block"
