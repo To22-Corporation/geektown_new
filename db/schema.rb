@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_31_094524) do
+ActiveRecord::Schema.define(version: 2019_01_03_054756) do
 
   create_table "answer_questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "answer_id", null: false
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2018_12_31_094524) do
   create_table "group_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "group_id", null: false
     t.integer "skill_id", null: false
-    t.integer "level", limit: 1, null: false
+    t.integer "level", limit: 1, default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -82,10 +82,10 @@ ActiveRecord::Schema.define(version: 2018_12_31_094524) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
-    t.string "university", null: false
-    t.string "faculty", null: false
-    t.string "comment", null: false
-    t.integer "grade", null: false
+    t.string "university"
+    t.string "faculty"
+    t.string "comment"
+    t.integer "grade"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
