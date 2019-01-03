@@ -6,19 +6,19 @@
   .form-group
     = f.label :description, "詳細"
     = f.text_area :description, class: "form-control", placeholder: "詳細を入力してください", required: true, rows: 5
-  fieldset.form-group
+  / fieldset.form-group
     = f.label :close_at, "閉鎖日"
     = f.text_field :close_at, class: "form-control", id: "pickadate", placeholder: "日付を入力してください", required: true
-  .form-group
+  / .form-group
     = f.label :limited_number, "制限人数"
     = f.number_field :limited_number, class: "form-control", placeholder: "制限人数を入力してください"
 
   .card.mb-4
-    = f.label :group_skills, '必須スキル', class: 'card-header'
+    = f.label :group_skills, '対象言語', class: 'card-header'
     = f.fields_for :group_skills do |g|
       ul.list-group.list-group-flush
         = render "group_skill_fields", f: g
-    = link_to_add_fields "スキル追加", f, :group_skills, 'btn-default btn'
+    = link_to_add_fields "言語追加", f, :group_skills, 'btn-default btn'
 
   .actions.mt-4
     = f.submit "Save", class: "btn btn-lg btn-primary btn-block"

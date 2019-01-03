@@ -15,7 +15,7 @@ class Group < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
-  validates :close_at, presence: true, unless: :is_master
+  # validates :close_at, presence: true, unless: :is_master
   validate :check_limit_number
 
   def check_limit_number

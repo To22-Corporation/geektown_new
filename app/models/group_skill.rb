@@ -4,7 +4,7 @@ class GroupSkill < ApplicationRecord
 
   validates :group, presence: true
   validates :skill, presence: true
-  validate :check_level
+  # validate :check_level
 
   def check_level
     errors.add(:skill, 'スキルレベルは1以上5以下で選択してください') unless (1..5).include?(level)

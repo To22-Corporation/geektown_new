@@ -1,10 +1,10 @@
 li.list-group-item
   .form-group.row
-    = f.label :skill_id, "スキル名", class: 'col-form-label col-2'
+    = f.label :skill_id, "言語名", class: 'col-form-label col-2'
     .col-10
-      = f.select :skill_id, @skills.map{|s| [s.name, s.id]}, { prompt: "スキル名を選択してください" }, class: "form-control"
+      = f.select :skill_id, @skills.map{|s| [s.name, s.id]}, { prompt: "言語を選択してください" }, class: "form-control"
 
-  .form-group.row
+  / .form-group.row
     = f.label :level, "レベル", class: 'col-form-label col-2'
     .col-10
       = f.number_field :level, class: "form-control", placeholder: 'レベルを入力してください'
