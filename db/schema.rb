@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_03_054756) do
+ActiveRecord::Schema.define(version: 2019_01_03_060242) do
 
   create_table "answer_questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "answer_id", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_01_03_054756) do
 
   create_table "message_participations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "message_id", null: false
-    t.integer "participation_id", null: false
+    t.integer "participation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["message_id", "participation_id"], name: "index_message_participations_on_message_id_and_participation_id", unique: true
