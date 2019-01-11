@@ -75,6 +75,14 @@ img{ max-width:100%;}
   display: inline-block;
   width: 10%;
 }
+.incoming_msg_name {
+  font-size: 8px;
+  margin: 0; 
+  padding: 5px 10px 5px 12px;
+  width:100%;
+  word-break: normal;
+  word-wrap: break-word;
+}
 .received_msg {
   display: inline-block;
   padding: 0 0 0 10px;
