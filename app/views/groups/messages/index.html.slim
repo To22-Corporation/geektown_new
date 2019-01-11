@@ -28,6 +28,9 @@ h4 =@group.name
           .incoming_msg_img
             = link_to "/users/#{message.user.id}/profile"
               img alt="image" src=message.user.profile.image.thumb30 /
+          .incoming_msg_name
+            = link_to "/users/#{message.user.id}/profile"
+              a.text-white.fa.fa-plus href="/questions/#{message.id}" ="#{message.user.profile.name}"
           .received_msg
             - if message.type == 'Chat'
               .received_withd_msg
