@@ -11,17 +11,17 @@
     = f.label :name, "名前", class: 'col-form-label col-2'
     .col-10
       = f.text_field :name, class: "form-control", placeholder: "名前を入力してください", required: true
-  .form-group.row
+  //.form-group.row
     = f.label :university, "大学", class: 'col-form-label col-2'
     .col-10
       // = f.select :university_id, @universities.map{|u| [u.name, u.id]}, { prompt: "大学を選択してください" }, class: "form-control", required: true
       = f.text_field :university, class: "form-control", placeholder: "大学を入力してください", required: true
-  .form-group.row
+  //.form-group.row
     = f.label :faculty, "学部", class: 'col-form-label col-2'
     .col-10
       // = f.select :faculty_id, @faculties.map{|f| [f.name, f.id]}, { prompt: "学部を選択してください" }, class: "form-control", required: true
       = f.text_field :faculty, class: "form-control", placeholder: "学部を入力してください", required: true
-  .form-group.row
+  //.form-group.row
     = f.label :grade, "学年", class: 'col-form-label col-2'
     .col-10
       = f.number_field :grade, class: "form-control", placeholder: "学年を入力してください", required: true
