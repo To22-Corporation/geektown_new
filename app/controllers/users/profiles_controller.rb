@@ -9,8 +9,8 @@ class Users::ProfilesController < ApplicationController
   end
 
   def set_master
-    @universities = University.all
-    @faculties = Faculty.all
+    #@universities = University.all
+    #@faculties = Faculty.all
     @skills = Skill.all
   end
 end
