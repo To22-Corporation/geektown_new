@@ -13,9 +13,9 @@ class Profile < ApplicationRecord
   validates :user_id, presence: true
   # validates :university_id, presence: true
   # validates :faculty_id, presence: true
-  validates :university, presence: true
-  validates :faculty, presence: true
+  #validates :university, presence: true
+  #validates :faculty, presence: true
   validates :name, presence: true
-  validates :grade, presence: true
+  #validates :grade, presence: true
   validates :comment, presence: true
 end
