@@ -46,12 +46,12 @@ class User::ProfilesController < ApplicationController
     params.require(:profile).permit(
       :image,
       :name,
-      :grade,
+      #:grade,
       :comment,
       # :university_id,
       # :faculty_id,
-      :university,
-      :faculty,
+      #:university,
+      #:faculty,
       profile_skills_attributes: %i[id skill_id level _destroy]
     )
   end
@@ -61,8 +61,8 @@ class User::ProfilesController < ApplicationController
   end
 
   def set_master
-    @universities = University.all
-    @faculties = Faculty.all
+    #@universities = University.all
+    #@faculties = Faculty.all
     @skills = Skill.all
   end
 end
